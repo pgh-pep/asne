@@ -34,9 +34,9 @@ class Channels(Enum):
     FRAME_LOST = 17
 
 
-class RCRecieverNode(Node):
+class RCRecieverDriverNode(Node):
     def __init__(self):
-        super().__init__("rc_reciever_node")
+        super().__init__("rc_reciever_driver_node")
 
         self.serial_port = "/dev/ttyUSB0"  # make ros param
         self.serial_ESP = serial.Serial(self.serial_port, BAUD_RATE, timeout=0.1)
@@ -117,11 +117,11 @@ def main(args=None):  # type: ignore
     rclpy.init(args=args)
     rc_reciever_node = None
     try:
-        rc_reciever_node = RCRecieverNode()
+        rc_reciever_driver_node = RCRecieverDriverNode()
         rclpy.spin(rc_reciever_node)
     finally:
-        if rc_reciever_node is not None:
-            rc_reciever_node.destroy_node()
+        if rc_reciever_driver_node is not None:
+            rc_reciever_driver_node.destroy_node()
         rclpy.shutdown()
 
 
