@@ -10,10 +10,10 @@ find_package(rosidl_default_generators REQUIRED)
 find_package(std_msgs REQUIRED)
 ament_auto_find_build_dependencies()
 
-# rosidl_generate_interfaces(${PROJECT_NAME}
-#     "msgs/..."
-#     DEPENDENCIES
-#     std_msgs
-# )
+rosidl_generate_interfaces(${PROJECT_NAME}
+    "msg/RCcontroller.msg"
+    DEPENDENCIES
+    std_msgs
+)
 
 ament_auto_package()
