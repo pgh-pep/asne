@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.8)
 project(asne_pkg)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra -Wpedantic)
+    add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
 find_package(ament_cmake_auto REQUIRED)
@@ -13,20 +13,21 @@ ament_python_install_package(${PROJECT_NAME})
 # Python Nodes:
 install(PROGRAMS
     ${PROJECT_NAME}/rc_reciever_driver_node.py
+    ${PROJECT_NAME}/waypoint_manager_node.py
     DESTINATION lib/${PROJECT_NAME}
 )
 
 # Cpp Nodes
 # ament_auto_add_executable(
-#     cpp_exe_name
-#     ${PROJECT_NAME}/cpp_node.cpp
-#     ${PROJECT_NAME}/other_cpp_file.cpp
-#     ...
+# cpp_exe_name
+# ${PROJECT_NAME}/cpp_node.cpp
+# ${PROJECT_NAME}/other_cpp_file.cpp
+# ...
 # )
 
 # target_link_libraries(cpp_exe_name non_ROS_dependencies)
-
 install(TARGETS
+
     # cpp_exe_name
     DESTINATION lib/${PROJECT_NAME}
 )
