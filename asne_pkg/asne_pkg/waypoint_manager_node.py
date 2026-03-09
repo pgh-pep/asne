@@ -60,14 +60,22 @@ class WaypointManagerNode(Node):
         # client to signal race completed
         self.race_over_client = self.create_client(Trigger, "asne/race_completed")
 
+        self.waypoint_timer = self.create_timer(0.01, self.waypoint_timer_callback)
+
     def generate_path(self) -> Path:
         path: Path = Path()
         path.header.stamp = self.get_clock().now().to_msg()
         path.header.frame_id = "map"  # check
 
         # TODO once recieve more information about the desired path
-
         return path
+
+    def waypoint_timer_callback(self):
+        if self.desired_wp is None:
+            self.get_logger().warn("Desired wp is None")
+            return
+
+        self.waypoint_pub.publish(self.desired_wp)
 
     def get_next_waypoint(self, request: Trigger.Request, response: Trigger.Response):
         self.current_path_idx += 1
@@ -77,7 +85,6 @@ class WaypointManagerNode(Node):
             self.current_lap += 1
 
             if self.current_lap >= self.n_laps:
-                req = Trigger.Request()
                 self.race_over_client.call_async(Trigger.Request())
 
         self.desired_wp = self.path.poses[self.current_path_idx]
@@ -101,6 +108,7 @@ class WaypointManagerNode(Node):
         x = (lon - lon0) * (pi / 180.0) * R * cos(lat0 * pi / 180.0)
         y = (lat - lat0) * (pi / 180.0) * R
         return (x, y)
+
 
 def main(args=None):
     rclpy.init(args=args)
