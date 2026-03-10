@@ -31,6 +31,9 @@ class Channels(Enum):
     FAIL_SAFE = 16
     FRAME_LOST = 17
 
+# TODO: three pronged switch distinguishes between manual, auto, and stationary
+# two pronged swtich is rc estop vs not rc estop
+# TODO: need client to disable rc estop
 
 class RCDecoderNode(Node):
     def __init__(self):

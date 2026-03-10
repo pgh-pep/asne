@@ -15,6 +15,7 @@ install(PROGRAMS
     ${PROJECT_NAME}/rc_decoder_node.py
     ${PROJECT_NAME}/waypoint_manager_node.py
     ${PROJECT_NAME}/serial_comm_node.py
+    ${PROJECT_NAME}/system_controller.py
     DESTINATION lib/${PROJECT_NAME}
 )
 

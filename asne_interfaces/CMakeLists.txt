@@ -12,6 +12,8 @@ ament_auto_find_build_dependencies()
 
 rosidl_generate_interfaces(${PROJECT_NAME}
     "msg/RCcontroller.msg"
+    "msg/State.msg"
+    "srv/SetState.srv"
     DEPENDENCIES
     std_msgs
 )
