@@ -43,7 +43,7 @@ class SystemController(Node):
         return response
 
     def reset_estop_callback(self, request: Trigger.Request, response: Trigger.Response):
-        if self.current_state == State.RC_ESTOP or self.current_state == State.GPS_ESTOP:
+        if self.current_state not in (State.RC_ESTOP, State.GPS_ESTOP):
             self.current_state = State.STATIONARY
             response.success = True
         else:
