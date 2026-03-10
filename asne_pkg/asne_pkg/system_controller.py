@@ -4,20 +4,25 @@ import rclpy
 from rclpy.node import Node
 from asne_interfaces.msg import State
 from asne_interfaces.srv import SetState
+from std_srvs.srv import Trigger
 
 
 class SystemController(Node):
     def __init__(self):
         super().__init__("system_controller")
-        self.current_state: State = State.MANUAL
+        self.current_state: State = State.STATIONARY
 
         self.state_pub = self.create_publisher(State, "/asne/state", 10)
         self.set_state_service = self.create_service(SetState, "/asne/set_state", self.set_state)
+        self.reset_estop_service = self.create_service(SetState, "/asne/reset_estop", self.reset_estop_callback)
 
     # only send service when trying to change state
     def set_state(self, request: SetState.Request, response: SetState.Response):
-        # TODO: check if in estop, if in estop ignore changes until that estop is resolves
-        # we need two more services for unlatching each estop
+        if self.current_state == State.RC_ESTOP or self.current_state == State.GPS_ESTOP:
+            self.get_logger().warn("Deactivate ESTOP before attempting to change state")
+            response.success = False
+            return response
+
         next_state: State = request.state
         match next_state:
             case State.MANUAL:
@@ -35,6 +40,15 @@ class SystemController(Node):
                 self.get_logger().info("Set to unknown state")
 
         response.success = True
+        return response
+
+    def reset_estop_callback(self, request: Trigger.Request, response: Trigger.Response):
+        if self.current_state == State.RC_ESTOP or self.current_state == State.GPS_ESTOP:
+            self.current_state = State.STATIONARY
+            response.success = True
+        else:
+            response.success = False
+
         return response
 
     def timer_callback(self):
