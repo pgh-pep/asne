@@ -12,8 +12,9 @@ ament_python_install_package(${PROJECT_NAME})
 
 # Python Nodes:
 install(PROGRAMS
-    ${PROJECT_NAME}/rc_reciever_driver_node.py
+    ${PROJECT_NAME}/rc_decoder_node.py
     ${PROJECT_NAME}/waypoint_manager_node.py
+    ${PROJECT_NAME}/serial_comm_node.py
     DESTINATION lib/${PROJECT_NAME}
 )
 

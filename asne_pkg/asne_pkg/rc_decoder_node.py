@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 
-import time
 from typing import Dict
 import rclpy
 from rclpy.node import Node
-import serial
 from enum import Enum
-from std_msgs.msg import Bool
-from seaweed_interfaces.msg import RCcontroller
+from std_msgs.msg import Bool, String
+from asne_interfaces.msg import RCcontroller
 
 
 BAUD_RATE = 115200
@@ -34,22 +32,23 @@ class Channels(Enum):
     FRAME_LOST = 17
 
 
-class RCRecieverDriverNode(Node):
+class RCDecoderNode(Node):
     def __init__(self):
-        super().__init__("rc_reciever_driver_node")
+        super().__init__("rc_decoder_node")
 
-        self.serial_port = "/dev/ttyUSB0"  # make ros param
-        self.serial_ESP = serial.Serial(self.serial_port, BAUD_RATE, timeout=0.1)
-        time.sleep(2.5)
+        self.rc_raw_sub = self.create_subscription(String, "/asne/rc/raw_string", self.rc_raw_callback, 10)
 
-        rc_controller_topic = "/rc/channels"
-        self.rc_msg_pub = self.create_publisher(RCcontroller, rc_controller_topic, 10)
+        self.rc_msg_pub = self.create_publisher(RCcontroller, "/asne/rc/channels", 10)
+        self.rc_fail_safe_pub = self.create_publisher(Bool, "/rc/fail_safe", 10)
 
-        rc_fail_safe_topic = "/rc/fail_safe"
-        self.rc_fail_safe_pub = self.create_publisher(Bool, rc_fail_safe_topic, 10)
-        self.timer = self.create_timer(0.01, self.timer_callback)
+    def rc_raw_callback(self, msg: String):
+        packet = msg.decode("utf-8", errors="ignore").strip()
+        channels = self.parse_packet(packet)
+        if channels is None:
+            return
 
-        self.get_logger().info(f"Serial ESP on {self.serial_port} @ {BAUD_RATE}")
+        self.pub_rc_msg(channels)
+        self.pub_fail_safe_msg(channels)
 
     def parse_packet(self, packet: str) -> Dict[Channels, float] | None:
         # expected packet: "CH1, CH2 ... CH16, failsafe, frame_lost"
@@ -68,15 +67,6 @@ class RCRecieverDriverNode(Node):
         except (ValueError, IndexError) as e:
             print(f"SBUS parse error: {e}")
             return None
-
-    def close_connection(self):
-        if self.serial_ESP:
-            self.serial_ESP.close()
-            print("ending SBUS comms")
-
-    def destroy_node(self):
-        self.close_connection()
-        super().destroy_node()
 
     def pub_rc_msg(self, channels: Dict[Channels, float]):
         msg = RCcontroller()
@@ -98,29 +88,14 @@ class RCRecieverDriverNode(Node):
 
         self.rc_fail_safe_pub.publish(msg)
 
-    def timer_callback(self):
-        raw_packet = self.serial_ESP.readline()
-        if not raw_packet:
-            return
-
-        packet = raw_packet.decode("utf-8", errors="ignore").strip()
-        channels = self.parse_packet(packet)
-        if channels is None:
-            return
-
-        self.pub_rc_msg(channels)
-        self.pub_fail_safe_msg(channels)
-
 
 def main(args=None):  # type: ignore
     rclpy.init(args=args)
-    rc_reciever_node = None
+    rc_decoder_node = RCDecoderNode()
     try:
-        rc_reciever_driver_node = RCRecieverDriverNode()
-        rclpy.spin(rc_reciever_node)
+        rclpy.spin(rc_decoder_node)
     finally:
-        if rc_reciever_driver_node is not None:
-            rc_reciever_driver_node.destroy_node()
+        rc_decoder_node.destroy_node()
         rclpy.shutdown()
 
 
