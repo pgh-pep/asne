@@ -16,7 +16,7 @@
   <depend>std_msgs</depend>
 
   <depend>asne_interfaces</depend>
-
+  <depend>nmea_navsat_driver</depend>
 
   <exec_depend>opencv-python</exec_depend>
   <exec_depend>numpy</exec_depend>

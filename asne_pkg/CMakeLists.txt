@@ -16,6 +16,7 @@ install(PROGRAMS
     ${PROJECT_NAME}/waypoint_manager_node.py
     ${PROJECT_NAME}/serial_comm_node.py
     ${PROJECT_NAME}/system_controller.py
+    ${PROJECT_NAME}/gps_failsafe_node.py.py
     DESTINATION lib/${PROJECT_NAME}
 )
 

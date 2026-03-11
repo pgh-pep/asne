@@ -7,6 +7,7 @@ from asne_interfaces.srv import SetState
 from std_srvs.srv import Trigger
 
 
+# TODO: Need ESTOP to be a list of faults rather than a state
 class SystemController(Node):
     def __init__(self):
         super().__init__("system_controller")
