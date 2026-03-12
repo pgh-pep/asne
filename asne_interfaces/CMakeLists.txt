@@ -14,8 +14,10 @@ rosidl_generate_interfaces(${PROJECT_NAME}
     "msg/RCcontroller.msg"
     "msg/State.msg"
     "srv/SetState.srv"
+    "srv/NextWaypoint.srv"
     DEPENDENCIES
     std_msgs
+    geometry_msgs
 )
 
 ament_auto_package()

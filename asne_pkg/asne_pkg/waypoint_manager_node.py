@@ -5,9 +5,10 @@ from typing import Tuple
 import rclpy
 from rclpy.node import Node
 from math import atan2, pi, sin, cos, sqrt
-from geometry_msgs.msg import Point
+from geometry_msgs.msg import Point, Pose, PoseStamped
 from nav_msgs.msg import Path
 from std_srvs.srv import Trigger
+from asne_interfaces.srv import NextWaypoint
 
 
 class WaypointManagerNode(Node):
@@ -43,16 +44,14 @@ class WaypointManagerNode(Node):
         # all waypoints in ENU (m) -> (east = x, north = y)
         # (0,0) will b einti as WP_A
         self.path: Path = self.generate_path()
-        self.desired_wp: Point = None
         self.current_path_idx: int = 0
         self.current_lap: int = 0
 
         # next waypoint publisher
-        desired_waypoint_topic: str = "asne/desired_waypoint"
-        self.waypoint_pub = self.create_publisher(Point, desired_waypoint_topic, 10)
+        self.waypoint_pub = self.create_publisher(Point, "asne/desired_waypoint", 10)
 
         # service to advance to next waypoint
-        self.next_waypoint_srv = self.create_service(Trigger, "asne/next_waypoint", self.get_next_waypoint)
+        self.next_waypoint_srv = self.create_service(NextWaypoint, "asne/next_waypoint", self.get_next_waypoint)
 
         # service to reset path back to first waypoint
         self.reset_path_srv = self.create_service(Trigger, "asne/reset_path", self.reset_path)
@@ -71,13 +70,15 @@ class WaypointManagerNode(Node):
         return path
 
     def waypoint_timer_callback(self):
-        if self.desired_wp is None:
+        pose: Pose = self.path.poses[self.current_path_idx].pose
+
+        if pose is None:
             self.get_logger().warn("Desired wp is None")
             return
 
-        self.waypoint_pub.publish(self.desired_wp)
+        self.waypoint_pub.publish(pose)
 
-    def get_next_waypoint(self, request: Trigger.Request, response: Trigger.Response):
+    def get_next_waypoint(self, request: NextWaypoint.Request, response: NextWaypoint.Response):
         self.current_path_idx += 1
 
         if self.current_path_idx >= len(self.path.poses):
@@ -87,13 +88,16 @@ class WaypointManagerNode(Node):
             if self.current_lap >= self.n_laps:
                 self.race_over_client.call_async(Trigger.Request())
 
-        self.desired_wp = self.path.poses[self.current_path_idx]
+        pose: PoseStamped = self.path.poses[self.current_path_idx]
+
+        response.waypoint.x = pose.pose.position.x
+        response.waypoint.y = pose.pose.position.y
         response.success = True
+
         return response
 
     def reset_path(self, request: Trigger.Request, response: Trigger.Response):
         self.current_path_idx = 0
-        self.desired_wp = self.path.poses[self.current_path_idx]
         response.success = True
         return response
 
