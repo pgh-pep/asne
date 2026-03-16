@@ -21,8 +21,8 @@ class SerialCommNode(Node):
 
         self.get_logger().info(f"opened serial comms w/ ESP on {self.serial_port} at {BAUD_RATE}")
 
-        self.servo_sub = self.create_subscription(Float64, "/asne/servo_angle", self.servo_callback, 10)
-        self.rc_raw_pub = self.create_subscription(String, "/asne/rc/raw_string", 10)
+        self.servo_sub = self.create_subscription(Float64, "asne/servo_angle", self.servo_callback, 10)
+        self.rc_raw_pub = self.create_subscription(String, "asne/rc/raw_string", 10)
 
         self.read_timer = self.create_timer(0.01, self.read_callback)
 

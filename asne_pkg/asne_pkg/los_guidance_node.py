@@ -146,7 +146,7 @@ class LOSGuidanceNode(Node):
 
         # goal heading:
         psi_d = alpha - atan2(xte + ki * self.e_int, self.lookahead_dist)
-        psi_d = atan2(sin(psi_d), cos(psi_d))  
+        psi_d = atan2(sin(psi_d), cos(psi_d))  # norm. to (-pi, pi]
 
         # along track error (waypoint switching)
         ate = (x - prev_wp[0]) * cos(alpha) + (y - prev_wp[1]) * sin(alpha)

@@ -47,16 +47,13 @@ class WaypointManagerNode(Node):
         self.current_path_idx: int = 0
         self.current_lap: int = 0
 
-        # next waypoint publisher
         self.waypoint_pub = self.create_publisher(Point, "asne/desired_waypoint", 10)
 
-        # service to advance to next waypoint
         self.next_waypoint_srv = self.create_service(NextWaypoint, "asne/next_waypoint", self.get_next_waypoint)
 
-        # service to reset path back to first waypoint
         self.reset_path_srv = self.create_service(Trigger, "asne/reset_path", self.reset_path)
 
-        # client to signal race completed
+        # UNUSED: client to signal race completed
         self.race_over_client = self.create_client(Trigger, "asne/race_completed")
 
         self.waypoint_timer = self.create_timer(0.01, self.waypoint_timer_callback)
