@@ -46,7 +46,7 @@ class LOSGuidanceNode(Node):
             10,
         )
 
-        self.heading_pub = self.create_publisher(Float64, "asne/goal_heading", 10)
+        self.heading_pub = self.create_publisher(Float64, "asne/heading/manual", 10)
 
         self.next_wp_client = self.create_client(NextWaypoint, "asne/next_waypoint")
         self.los_timer = self.create_timer(0.1, self.LOS_guidance)
