@@ -40,7 +40,7 @@ class ServoControlNode(Node):
         servo_angle = max(min(SERVO_RANGE, servo_angle), -SERVO_RANGE)
 
         self.desired_autonomous_heading = servo_angle
-        
+
     def state_callback(self, msg: State):
         self.state = msg.state
 
