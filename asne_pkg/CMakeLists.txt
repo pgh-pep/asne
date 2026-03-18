@@ -18,6 +18,7 @@ install(PROGRAMS
     ${PROJECT_NAME}/system_controller.py
     ${PROJECT_NAME}/gps_failsafe_node.py
     ${PROJECT_NAME}/servo_control_node.py
+    ${PROJECT_NAME}/manual_control_node.py
     DESTINATION lib/${PROJECT_NAME}
 )
 
