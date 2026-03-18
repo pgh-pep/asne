@@ -62,8 +62,7 @@ class ServoControlNode(Node):
                 servo_angle = 0.0
 
         servo_msg.data = servo_angle  # rads
-        self.servo_pub.publish()
-
+        self.servo_pub.publish(servo_msg)
 
 def main(args=None):
     rclpy.init(args=args)
