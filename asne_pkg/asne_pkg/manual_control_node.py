@@ -10,7 +10,9 @@ class ManualContolNode(Node):
     def __init__(self):
         super().__init__("manual_control_node")
         
-        self.max_angular_velocity:float = 1.0
+        self.declare_parameter("max_linear_velocity", 1.0)
+        
+        self.max_linear_velocity:float = self.get_parameter("max_linear_velocity").value
         self.max_linear_velocity:float = 1.0
 
         self.desired_heading:float = 1.0
@@ -23,7 +25,7 @@ class ManualContolNode(Node):
     def rc_msg_callback(self, msg: RCcontroller):
         # Right joystick: linear velocity
         # Left joystick: desired heading
-        self.desired_linear_velocity = self.clamp_velocity(self.max_linear_velocity, 0, msg.joy_r_ud * self.max_linear_velocity) 
+        self.desired_linear_velocity = self.clamp_velocity(self.max_linear_velocity, 0, (msg.joy_r_ud ** 3) * self.max_linear_velocity) 
         
         x = msg.joy_l_rl
         y = msg.joy_l_ud
