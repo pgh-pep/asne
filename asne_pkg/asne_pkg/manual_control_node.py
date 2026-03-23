@@ -25,7 +25,7 @@ class ManualContolNode(Node):
     def rc_msg_callback(self, msg: RCcontroller):
         # Right joystick: linear velocity
         # Left joystick: desired heading
-        self.desired_linear_velocity = self.clamp_velocity(self.max_linear_velocity, 0, (msg.joy_r_ud ** 3) * self.max_linear_velocity) 
+        self.desired_linear_velocity = self.clamp_velocity(0, self.max_linear_velocity, (msg.joy_r_ud ** 3) * self.max_linear_velocity) 
         
         x = msg.joy_l_rl
         y = msg.joy_l_ud
