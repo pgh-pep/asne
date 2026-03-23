@@ -1,14 +1,14 @@
 [FileInfo]
-FileName=C:/Borgwarner-DCF-DLD/DCF/2026-01-16-ME1117-0705-0015-GEN4-2445-Valentin-DUCAS-Config-OK-11h59.dcf
+FileName=C:/Users/varun/Downloads/sevcon_working.dcf
 FileVersion=1
 FileRevision=0
 EDSVersion=4.0
 Description=BorgWarner Gen4 (PMAC)Tue Oct 15 15:41:
-CreationTime=11:58AM
-CreationDate=01-16-2026
+CreationTime=05:56PM
+CreationDate=03-22-2026
 CreatedBy=BorgWarner (SEVCON)
-ModificationTime=11:58AM
-ModificationDate=01-16-2026
+ModificationTime=05:56PM
+ModificationDate=03-22-2026
 ModifiedBy=BorgWarner (SEVCON)
 
 [DeviceInfo]
@@ -16,7 +16,7 @@ VendorName=BorgWarner (SEVCON)
 ProductName=Gen4
 OrderCode=TODO
 VendorNumber=0x0000001e
-ProductNumber=0x0705182d
+ProductNumber=0x0705301b
 RevisionNumber=0x0001002d
 BaudRate_10=0
 BaudRate_20=1
@@ -65,7 +65,7 @@ SupportedObjects=3
 
 [1000]
 ParameterName=Device type
-ParameterValue=0x00000000
+ParameterValue=0x28000011
 ObjectType=7
 DataType=7
 AccessType=const
@@ -101,7 +101,7 @@ DefaultValue=0xFFFF0192
 
 [1001]
 ParameterName=Error register
-ParameterValue=0x00
+ParameterValue=0x01
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -216,7 +216,7 @@ DefaultValue=0x0000001E
 
 [1018sub2]
 ParameterName=Product code
-ParameterValue=0x0705182d
+ParameterValue=0x0705301b
 ObjectType=7
 DataType=7
 AccessType=ro
@@ -245,7 +245,7 @@ DefaultValue=0x00010001
 
 [1018sub4]
 ParameterName=Serial number
-ParameterValue=0x83321f8b
+ParameterValue=0x8f1dfc09
 ObjectType=7
 DataType=7
 AccessType=ro
@@ -416,7 +416,7 @@ PDOMapping=0
 
 [1009]
 ParameterName=Hardware version
-ParameterValue=0x01020002
+ParameterValue=0x01070004
 ObjectType=7
 DataType=9
 AccessType=const
@@ -6708,7 +6708,7 @@ DefaultValue=0x00000000
 
 [6040]
 ParameterName=controlword
-ParameterValue=0x8007
+ParameterValue=0x040f
 ObjectType=7
 DataType=6
 AccessType=rww
@@ -6724,7 +6724,7 @@ ObjFlags=0x1
 
 [6041]
 ParameterName=statusword
-ParameterValue=0x0433
+ParameterValue=0x0450
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -6955,7 +6955,7 @@ DefaultValue=0
 
 [6075]
 ParameterName=Current limit
-ParameterValue=0x0006ddd0
+ParameterValue=0x00043238
 ObjectType=7
 DataType=7
 AccessType=rw
@@ -7025,7 +7025,7 @@ DefaultValue=0
 
 [6079]
 ParameterName=Capacitor Voltage
-ParameterValue=0x00009e9b
+ParameterValue=0x0000bc33
 ObjectType=7
 DataType=7
 AccessType=ro
@@ -7042,7 +7042,7 @@ DefaultValue=0
 
 [6080]
 ParameterName=Maximum motor speed
-ParameterValue=0x00000000
+ParameterValue=0x00002710
 ObjectType=7
 DataType=7
 AccessType=rw
@@ -7442,7 +7442,7 @@ DefaultValue=2
 
 [6800sub1]
 ParameterName=Digital Inputs 1..8 states
-ParameterValue=0x04
+ParameterValue=0x00
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -7454,7 +7454,7 @@ PDOMapping=1
 
 [6800sub2]
 ParameterName=Digital Inputs 9..16 states
-ParameterValue=0x05
+ParameterValue=0x15
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -7683,7 +7683,7 @@ DefaultValue=16
 
 [6C01sub1]
 ParameterName=Analog input 1 voltage
-ParameterValue=0x03c7
+ParameterValue=0x002c
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -7696,7 +7696,7 @@ PDOMapping=1
 
 [6C01sub2]
 ParameterName=Analog input 2 voltage
-ParameterValue=0x0000
+ParameterValue=0x0025
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -7709,7 +7709,7 @@ PDOMapping=1
 
 [6C01sub3]
 ParameterName=Analog input 3 voltage
-ParameterValue=0x09d5
+ParameterValue=0x0d49
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -7735,7 +7735,7 @@ PDOMapping=1
 
 [6C01sub5]
 ParameterName=Analog input 5 voltage
-ParameterValue=0x029d
+ParameterValue=0x0d18
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -7768,7 +7768,7 @@ DefaultValue=7
 
 [6C11sub1]
 ParameterName=Analog output 1 value (in amps or volts depending on current / voltage mode (46A1h)).
-ParameterValue=0x1200
+ParameterValue=0x0000
 ObjectType=7
 DataType=3
 AccessType=rww
@@ -7783,7 +7783,7 @@ DefaultValue=0
 
 [6C11sub2]
 ParameterName=Analog output 2 value (in amps or volts depending on current / voltage mode (46A1h)).
-ParameterValue=0x1800
+ParameterValue=0x0000
 ObjectType=7
 DataType=3
 AccessType=rww
@@ -7798,7 +7798,7 @@ DefaultValue=0
 
 [6C11sub3]
 ParameterName=Analog output 3 value (in amps or volts depending on current / voltage mode (46A1h)).
-ParameterValue=0x1800
+ParameterValue=0x0000
 ObjectType=7
 DataType=3
 AccessType=rww
@@ -8259,7 +8259,7 @@ DefaultValue=6
 
 [2020sub1]
 ParameterName=controlword - left motor
-ParameterValue=0x8007
+ParameterValue=0x0000
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -8272,7 +8272,7 @@ PDOMapping=1
 
 [2020sub2]
 ParameterName=statusword - left motor
-ParameterValue=0x0433
+ParameterValue=0x0000
 ObjectType=7
 DataType=6
 AccessType=rww
@@ -8360,7 +8360,7 @@ DefaultValue=6
 
 [2021sub1]
 ParameterName=controlword - right motor
-ParameterValue=0x8000
+ParameterValue=0x0000
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -8461,7 +8461,7 @@ DefaultValue=6
 
 [2040sub1]
 ParameterName=controlword - pump motor
-ParameterValue=0xc000
+ParameterValue=0x0000
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -8719,7 +8719,7 @@ ObjFlags=0x1
 
 [2123]
 ParameterName=FS1 switch
-ParameterValue=0x01
+ParameterValue=0x00
 ObjectType=7
 DataType=1
 AccessType=rww
@@ -9284,7 +9284,7 @@ ObjFlags=0x1
 
 [2220]
 ParameterName=Throttle Input Voltage
-ParameterValue=0x03c9
+ParameterValue=0x0000
 ObjectType=7
 DataType=3
 AccessType=rww
@@ -9420,7 +9420,7 @@ PDOMapping=1
 
 [2400]
 ParameterName=Line contactor
-ParameterValue=0x1200
+ParameterValue=0x0000
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -9435,7 +9435,7 @@ PDOMapping=1
 
 [2401]
 ParameterName=External LED
-ParameterValue=0x1800
+ParameterValue=0x0000
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -9525,7 +9525,7 @@ PDOMapping=1
 
 [2421]
 ParameterName=Traction Motor Cooling Fan
-ParameterValue=0x1800
+ParameterValue=0x0000
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -9542,7 +9542,7 @@ PDOMapping=1
 
 [2422]
 ParameterName=Motor Isolation Contactor
-ParameterValue=0x1800
+ParameterValue=0x0000
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -9587,7 +9587,7 @@ PDOMapping=1
 
 [2460]
 ParameterName=Power steer contactor
-ParameterValue=0x1800
+ParameterValue=0x0000
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -9745,7 +9745,7 @@ DefaultValue=5
 
 [2720sub1]
 ParameterName=Driveability Profile Status
-ParameterValue=0x0001
+ParameterValue=0x0000
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -9839,7 +9839,7 @@ PDOMapping=1
 
 [2720sub2]
 ParameterName=Traction Drive State
-ParameterValue=0x09
+ParameterValue=0x00
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -9883,7 +9883,7 @@ PDOMapping=1
 
 [2720sub4]
 ParameterName=SRO State
-ParameterValue=0x02
+ParameterValue=0x00
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -9901,7 +9901,7 @@ PDOMapping=1
 
 [2720sub5]
 ParameterName=Operator Presence (Seat) State
-ParameterValue=0x01
+ParameterValue=0x00
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -9993,7 +9993,7 @@ DefaultValue=1
 
 [2740sub1]
 ParameterName=Pump Drive State
-ParameterValue=0x01
+ParameterValue=0x00
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -10077,7 +10077,7 @@ DefaultValue=1
 
 [2760sub1]
 ParameterName=Power Steer Drive State
-ParameterValue=0x03
+ParameterValue=0x00
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -10114,7 +10114,7 @@ DefaultValue=2
 
 [2781sub1]
 ParameterName=Hours
-ParameterValue=0x0000
+ParameterValue=0x0009
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -10128,7 +10128,7 @@ ObjFlags=0x1
 
 [2781sub2]
 ParameterName=Minutes / Seconds
-ParameterValue=0xee
+ParameterValue=0x19
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -10177,7 +10177,7 @@ ObjFlags=0x1
 
 [2782sub2]
 ParameterName=Minutes / Seconds
-ParameterValue=0x04
+ParameterValue=0x00
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -10275,7 +10275,7 @@ ObjFlags=0x1
 
 [2784sub2]
 ParameterName=Minutes / Seconds
-ParameterValue=0x1f
+ParameterValue=0x00
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -10388,7 +10388,7 @@ ObjFlags=0x1
 
 [278F]
 ParameterName=Running indicators
-ParameterValue=0x0025
+ParameterValue=0x0005
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -10507,7 +10507,7 @@ PDOMapping=1
 
 [2800]
 ParameterName=Force system to pre-operational state
-ParameterValue=0x00
+ParameterValue=0x01
 ObjectType=7
 DataType=1
 AccessType=rw
@@ -15496,7 +15496,7 @@ DefaultValue=2
 
 [29A0sub1]
 ParameterName=Odometer distance in Km
-ParameterValue=0x00000207
+ParameterValue=0x00000000
 ObjectType=7
 DataType=7
 AccessType=rw
@@ -15514,7 +15514,7 @@ DefaultValue=0
 
 [29A0sub2]
 ParameterName=Odometer distance in Km
-ParameterValue=0x00000014
+ParameterValue=0x00000000
 ObjectType=7
 DataType=7
 AccessType=ro
@@ -15529,7 +15529,7 @@ DefaultValue=0
 
 [29A0sub3]
 ParameterName=Odometer distance in miles
-ParameterValue=0x0000000c
+ParameterValue=0x00000000
 ObjectType=7
 DataType=7
 AccessType=ro
@@ -15564,7 +15564,7 @@ DefaultValue=2
 
 [29A1sub1]
 ParameterName=Trip Distance in km
-ParameterValue=0x00000207
+ParameterValue=0x00000000
 ObjectType=7
 DataType=7
 AccessType=ro
@@ -15579,7 +15579,7 @@ DefaultValue=0
 
 [29A1sub2]
 ParameterName=Trip Distance in km
-ParameterValue=0x00000014
+ParameterValue=0x00000000
 ObjectType=7
 DataType=7
 AccessType=ro
@@ -15594,7 +15594,7 @@ DefaultValue=0
 
 [29A1sub3]
 ParameterName=Trip Distance in miles
-ParameterValue=0x0000000c
+ParameterValue=0x00000000
 ObjectType=7
 DataType=7
 AccessType=ro
@@ -17268,7 +17268,7 @@ DefaultValue=0
 
 [2C00]
 ParameterName=Nominal battery voltage
-ParameterValue=0x0240
+ParameterValue=0x0300
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -17309,7 +17309,7 @@ DefaultValue=2
 
 [2C01sub1]
 ParameterName=Over voltage start cutback
-ParameterValue=0x02d0
+ParameterValue=0x039a
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -17325,7 +17325,7 @@ DefaultValue=0x03A0
 
 [2C01sub2]
 ParameterName=Over voltage limit
-ParameterValue=0x0300
+ParameterValue=0x0414
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -17362,7 +17362,7 @@ DefaultValue=2
 
 [2C02sub1]
 ParameterName=Under voltage start cutback
-ParameterValue=0x0210
+ParameterValue=0x021a
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -17378,7 +17378,7 @@ DefaultValue=0x01c0
 
 [2C02sub2]
 ParameterName=Under voltage limit
-ParameterValue=0x01e0
+ParameterValue=0x01f3
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -17541,7 +17541,7 @@ DefaultValue=0
 
 [2C30sub6]
 ParameterName=Cell count
-ParameterValue=0x12
+ParameterValue=0x18
 ObjectType=7
 DataType=5
 AccessType=rw
@@ -18304,7 +18304,7 @@ DefaultValue=1
 
 [3000sub1]
 ParameterName=Local Motor 1 VPDO Mapping
-ParameterValue=0x2020
+ParameterValue=0x20ff
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -18402,7 +18402,7 @@ ParameterName=Digital input VPDO Mapping
 
 [3300sub0]
 ParameterName=Number of entries
-ParameterValue=0x03
+ParameterValue=0x00
 ObjectType=7
 DataType=5
 AccessType=rw
@@ -18634,7 +18634,7 @@ ParameterName=Analog input VPDO Mapping
 
 [3400sub0]
 ParameterName=Number of entries
-ParameterValue=0x01
+ParameterValue=0x00
 ObjectType=7
 DataType=5
 AccessType=rw
@@ -18977,7 +18977,7 @@ DefaultValue=0
 
 [4110sub2]
 ParameterName=Number of items in Faults FIFO
-ParameterValue=0x001d
+ParameterValue=0x0028
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19168,7 +19168,7 @@ DefaultValue=6
 
 [4201sub1]
 ParameterName=Event ID
-ParameterValue=0x45c4
+ParameterValue=0x3441
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -19198,7 +19198,7 @@ PDOMapping=0
 
 [4201sub3]
 ParameterName=First Event Minutes / Seconds
-ParameterValue=0x00
+ParameterValue=0x02
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19213,7 +19213,7 @@ PDOMapping=0
 
 [4201sub4]
 ParameterName=Last Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0004
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19227,7 +19227,7 @@ PDOMapping=0
 
 [4201sub5]
 ParameterName=Last Event Minutes / Seconds
-ParameterValue=0x4e
+ParameterValue=0xce
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19242,7 +19242,7 @@ PDOMapping=0
 
 [4201sub6]
 ParameterName=Counter
-ParameterValue=0x0004
+ParameterValue=0x0002
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19274,7 +19274,7 @@ DefaultValue=6
 
 [4202sub1]
 ParameterName=Event ID
-ParameterValue=0x4981
+ParameterValue=0x5306
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -19290,7 +19290,7 @@ DefaultValue=0
 
 [4202sub2]
 ParameterName=First Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0006
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19304,7 +19304,7 @@ PDOMapping=0
 
 [4202sub3]
 ParameterName=First Event Minutes / Seconds
-ParameterValue=0x00
+ParameterValue=0x3a
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19319,7 +19319,7 @@ PDOMapping=0
 
 [4202sub4]
 ParameterName=Last Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0006
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19333,7 +19333,7 @@ PDOMapping=0
 
 [4202sub5]
 ParameterName=Last Event Minutes / Seconds
-ParameterValue=0xa7
+ParameterValue=0x3a
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19348,7 +19348,7 @@ PDOMapping=0
 
 [4202sub6]
 ParameterName=Counter
-ParameterValue=0x0002
+ParameterValue=0x0001
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19380,7 +19380,7 @@ DefaultValue=6
 
 [4203sub1]
 ParameterName=Event ID
-ParameterValue=0x4884
+ParameterValue=0x52c4
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -19396,7 +19396,7 @@ DefaultValue=0
 
 [4203sub2]
 ParameterName=First Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0007
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19410,7 +19410,7 @@ PDOMapping=0
 
 [4203sub3]
 ParameterName=First Event Minutes / Seconds
-ParameterValue=0xa7
+ParameterValue=0x4c
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19425,7 +19425,7 @@ PDOMapping=0
 
 [4203sub4]
 ParameterName=Last Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0007
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19439,7 +19439,7 @@ PDOMapping=0
 
 [4203sub5]
 ParameterName=Last Event Minutes / Seconds
-ParameterValue=0xa7
+ParameterValue=0x4c
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19486,7 +19486,7 @@ DefaultValue=6
 
 [4204sub1]
 ParameterName=Event ID
-ParameterValue=0x2401
+ParameterValue=0x5044
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -19516,7 +19516,7 @@ PDOMapping=0
 
 [4204sub3]
 ParameterName=First Event Minutes / Seconds
-ParameterValue=0x07
+ParameterValue=0x04
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19531,7 +19531,7 @@ PDOMapping=0
 
 [4204sub4]
 ParameterName=Last Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0007
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19545,7 +19545,7 @@ PDOMapping=0
 
 [4204sub5]
 ParameterName=Last Event Minutes / Seconds
-ParameterValue=0xe1
+ParameterValue=0x9d
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19560,7 +19560,7 @@ PDOMapping=0
 
 [4204sub6]
 ParameterName=Counter
-ParameterValue=0x000c
+ParameterValue=0x0035
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19592,7 +19592,7 @@ DefaultValue=6
 
 [4205sub1]
 ParameterName=Event ID
-ParameterValue=0x4681
+ParameterValue=0x4f41
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -19608,7 +19608,7 @@ DefaultValue=0
 
 [4205sub2]
 ParameterName=First Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0007
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19622,7 +19622,7 @@ PDOMapping=0
 
 [4205sub3]
 ParameterName=First Event Minutes / Seconds
-ParameterValue=0x08
+ParameterValue=0x2e
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19637,7 +19637,7 @@ PDOMapping=0
 
 [4205sub4]
 ParameterName=Last Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0007
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19651,7 +19651,7 @@ PDOMapping=0
 
 [4205sub5]
 ParameterName=Last Event Minutes / Seconds
-ParameterValue=0x72
+ParameterValue=0x96
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19698,7 +19698,7 @@ DefaultValue=6
 
 [4206sub1]
 ParameterName=Event ID
-ParameterValue=0x4f41
+ParameterValue=0x5043
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -19714,7 +19714,7 @@ DefaultValue=0
 
 [4206sub2]
 ParameterName=First Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0009
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19728,7 +19728,7 @@ PDOMapping=0
 
 [4206sub3]
 ParameterName=First Event Minutes / Seconds
-ParameterValue=0x3b
+ParameterValue=0x07
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19743,7 +19743,7 @@ PDOMapping=0
 
 [4206sub4]
 ParameterName=Last Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0009
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19757,7 +19757,7 @@ PDOMapping=0
 
 [4206sub5]
 ParameterName=Last Event Minutes / Seconds
-ParameterValue=0x72
+ParameterValue=0x07
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19772,7 +19772,7 @@ PDOMapping=0
 
 [4206sub6]
 ParameterName=Counter
-ParameterValue=0x0004
+ParameterValue=0x0001
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19804,7 +19804,7 @@ DefaultValue=6
 
 [4207sub1]
 ParameterName=Event ID
-ParameterValue=0x5043
+ParameterValue=0x2401
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -19820,7 +19820,7 @@ DefaultValue=0
 
 [4207sub2]
 ParameterName=First Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0006
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19834,7 +19834,7 @@ PDOMapping=0
 
 [4207sub3]
 ParameterName=First Event Minutes / Seconds
-ParameterValue=0x3b
+ParameterValue=0x29
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19849,7 +19849,7 @@ PDOMapping=0
 
 [4207sub4]
 ParameterName=Last Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0009
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19863,7 +19863,7 @@ PDOMapping=0
 
 [4207sub5]
 ParameterName=Last Event Minutes / Seconds
-ParameterValue=0x4e
+ParameterValue=0x0b
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19878,7 +19878,7 @@ PDOMapping=0
 
 [4207sub6]
 ParameterName=Counter
-ParameterValue=0x0002
+ParameterValue=0x002d
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19910,7 +19910,7 @@ DefaultValue=6
 
 [4208sub1]
 ParameterName=Event ID
-ParameterValue=0x5044
+ParameterValue=0x4f01
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -19926,7 +19926,7 @@ DefaultValue=0
 
 [4208sub2]
 ParameterName=First Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0005
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19940,7 +19940,7 @@ PDOMapping=0
 
 [4208sub3]
 ParameterName=First Event Minutes / Seconds
-ParameterValue=0x3b
+ParameterValue=0xb0
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19955,7 +19955,7 @@ PDOMapping=0
 
 [4208sub4]
 ParameterName=Last Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0005
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -19969,7 +19969,7 @@ PDOMapping=0
 
 [4208sub5]
 ParameterName=Last Event Minutes / Seconds
-ParameterValue=0x72
+ParameterValue=0xb0
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -19984,7 +19984,7 @@ PDOMapping=0
 
 [4208sub6]
 ParameterName=Counter
-ParameterValue=0x0004
+ParameterValue=0x0001
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -20016,7 +20016,7 @@ DefaultValue=6
 
 [4209sub1]
 ParameterName=Event ID
-ParameterValue=0x3441
+ParameterValue=0x52c1
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -20032,7 +20032,7 @@ DefaultValue=0
 
 [4209sub2]
 ParameterName=First Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0005
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -20046,7 +20046,7 @@ PDOMapping=0
 
 [4209sub3]
 ParameterName=First Event Minutes / Seconds
-ParameterValue=0x3b
+ParameterValue=0x58
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -20061,7 +20061,7 @@ PDOMapping=0
 
 [4209sub4]
 ParameterName=Last Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0008
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -20075,7 +20075,7 @@ PDOMapping=0
 
 [4209sub5]
 ParameterName=Last Event Minutes / Seconds
-ParameterValue=0x3b
+ParameterValue=0x47
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -20090,7 +20090,7 @@ PDOMapping=0
 
 [4209sub6]
 ParameterName=Counter
-ParameterValue=0x0001
+ParameterValue=0x000b
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -20122,7 +20122,7 @@ DefaultValue=6
 
 [420Asub1]
 ParameterName=Event ID
-ParameterValue=0x45c3
+ParameterValue=0x5308
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -20138,7 +20138,7 @@ DefaultValue=0
 
 [420Asub2]
 ParameterName=First Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0006
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -20152,7 +20152,7 @@ PDOMapping=0
 
 [420Asub3]
 ParameterName=First Event Minutes / Seconds
-ParameterValue=0x68
+ParameterValue=0x3a
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -20167,7 +20167,7 @@ PDOMapping=0
 
 [420Asub4]
 ParameterName=Last Event Hours
-ParameterValue=0x0000
+ParameterValue=0x0006
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -20181,7 +20181,7 @@ PDOMapping=0
 
 [420Asub5]
 ParameterName=Last Event Minutes / Seconds
-ParameterValue=0x72
+ParameterValue=0x3a
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -20196,7 +20196,7 @@ PDOMapping=0
 
 [420Asub6]
 ParameterName=Counter
-ParameterValue=0x0003
+ParameterValue=0x0001
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -20246,7 +20246,7 @@ DefaultValue=0
 
 [4300sub2]
 ParameterName=Minimum Battery Voltage
-ParameterValue=0x0191
+ParameterValue=0x01e2
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20259,7 +20259,7 @@ PDOMapping=0
 
 [4300sub3]
 ParameterName=Maximum Battery Voltage
-ParameterValue=0x028d
+ParameterValue=0x043a
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20272,7 +20272,7 @@ PDOMapping=0
 
 [4300sub4]
 ParameterName=Minimum Capacitor Voltage
-ParameterValue=0x00a1
+ParameterValue=0x01f5
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20285,7 +20285,7 @@ PDOMapping=0
 
 [4300sub5]
 ParameterName=Maximum Capacitor Voltage
-ParameterValue=0x028b
+ParameterValue=0x0326
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20310,7 +20310,7 @@ PDOMapping=0
 
 [4300sub7]
 ParameterName=Maximum Motor Current 1
-ParameterValue=0x0038
+ParameterValue=0x0032
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20346,7 +20346,7 @@ PDOMapping=0
 
 [4300subA]
 ParameterName=Minimum Motor Speed
-ParameterValue=0xfffc
+ParameterValue=0x8000
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20358,7 +20358,7 @@ PDOMapping=0
 
 [4300subB]
 ParameterName=Maximum Motor Speed
-ParameterValue=0x0bc7
+ParameterValue=0x78ae
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20370,7 +20370,7 @@ PDOMapping=0
 
 [4300subC]
 ParameterName=Minimum Device Temperature
-ParameterValue=0x000e
+ParameterValue=0x0015
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20382,7 +20382,7 @@ PDOMapping=0
 
 [4300subD]
 ParameterName=Maximum Device Temperature
-ParameterValue=0x0010
+ParameterValue=0x001e
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20431,7 +20431,7 @@ DefaultValue=0
 
 [4301sub2]
 ParameterName=Minimum Battery Voltage
-ParameterValue=0x020e
+ParameterValue=0x01f4
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20444,7 +20444,7 @@ PDOMapping=0
 
 [4301sub3]
 ParameterName=Maximum Battery Voltage
-ParameterValue=0x028d
+ParameterValue=0x031e
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20457,7 +20457,7 @@ PDOMapping=0
 
 [4301sub4]
 ParameterName=Minimum Capacitor Voltage
-ParameterValue=0x00c1
+ParameterValue=0x0207
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20470,7 +20470,7 @@ PDOMapping=0
 
 [4301sub5]
 ParameterName=Maximum Capacitor Voltage
-ParameterValue=0x028a
+ParameterValue=0x031d
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20495,7 +20495,7 @@ PDOMapping=0
 
 [4301sub7]
 ParameterName=Maximum Motor Current 1
-ParameterValue=0x0029
+ParameterValue=0x001e
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20531,7 +20531,7 @@ PDOMapping=0
 
 [4301subA]
 ParameterName=Minimum Motor Speed
-ParameterValue=0xfffc
+ParameterValue=0xfc1a
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20543,7 +20543,7 @@ PDOMapping=0
 
 [4301subB]
 ParameterName=Maximum Motor Speed
-ParameterValue=0x0b7d
+ParameterValue=0x0e50
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20555,7 +20555,7 @@ PDOMapping=0
 
 [4301subC]
 ParameterName=Minimum Device Temperature
-ParameterValue=0x000e
+ParameterValue=0x0017
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20567,7 +20567,7 @@ PDOMapping=0
 
 [4301subD]
 ParameterName=Maximum Device Temperature
-ParameterValue=0x0010
+ParameterValue=0x001c
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20613,7 +20613,7 @@ PDOMapping=1
 
 [4600sub3]
 ParameterName=Motor Temperature 1 (Measured - TH1)
-ParameterValue=0x0004
+ParameterValue=0x0077
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20671,7 +20671,7 @@ PDOMapping=1
 
 [4600sub7]
 ParameterName=Id
-ParameterValue=0x0000
+ParameterValue=0xfffd
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20686,7 +20686,7 @@ PDOMapping=1
 
 [4600sub8]
 ParameterName=Iq
-ParameterValue=0x0000
+ParameterValue=0x0004
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20848,7 +20848,7 @@ ObjFlags=0x1
 
 [4601sub2]
 ParameterName=Minutes / Seconds
-ParameterValue=0x04
+ParameterValue=0x94
 ObjectType=7
 DataType=5
 AccessType=rw
@@ -20896,7 +20896,7 @@ PDOMapping=1
 
 [4602sub2]
 ParameterName=Junction Temperature M1L
-ParameterValue=0x0010
+ParameterValue=0x0018
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20910,7 +20910,7 @@ PDOMapping=1
 
 [4602sub3]
 ParameterName=Junction Temperature M2L
-ParameterValue=0x0010
+ParameterValue=0x0018
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20924,7 +20924,7 @@ PDOMapping=1
 
 [4602sub4]
 ParameterName=Junction Temperature M3L
-ParameterValue=0x0010
+ParameterValue=0x0018
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20938,7 +20938,7 @@ PDOMapping=1
 
 [4602sub5]
 ParameterName=Junction Temperature M1U
-ParameterValue=0x0010
+ParameterValue=0x0018
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20952,7 +20952,7 @@ PDOMapping=1
 
 [4602sub6]
 ParameterName=Junction Temperature M2U
-ParameterValue=0x0010
+ParameterValue=0x0018
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20966,7 +20966,7 @@ PDOMapping=1
 
 [4602sub7]
 ParameterName=Junction Temperature M3U
-ParameterValue=0x0010
+ParameterValue=0x0018
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20980,7 +20980,7 @@ PDOMapping=1
 
 [4602sub8]
 ParameterName=Motor Temperature Estimate
-ParameterValue=0x0002
+ParameterValue=0x0077
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -20994,7 +20994,7 @@ PDOMapping=1
 
 [4602sub9]
 ParameterName=Heatsink Temperature
-ParameterValue=0x10
+ParameterValue=0x18
 ObjectType=7
 DataType=2
 AccessType=ro
@@ -21008,7 +21008,7 @@ PDOMapping=1
 
 [4602subA]
 ParameterName=Overall Maximum Temperature
-ParameterValue=0x004c
+ParameterValue=0x0077
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -21107,7 +21107,7 @@ PDOMapping=1
 
 [4602sub11]
 ParameterName=Battery Voltage
-ParameterValue=0x0288
+ParameterValue=0x0302
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -21121,7 +21121,7 @@ PDOMapping=1
 
 [4602sub12]
 ParameterName=Capacitor Voltage
-ParameterValue=0x0289
+ParameterValue=0x0302
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -21135,7 +21135,7 @@ PDOMapping=1
 
 [4602sub13]
 ParameterName=Capacitor short term temperature estimate
-ParameterValue=0x0011
+ParameterValue=0x0018
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -21149,7 +21149,7 @@ PDOMapping=1
 
 [4602sub14]
 ParameterName=PCB Track Temperature Estimate
-ParameterValue=0x0012
+ParameterValue=0x0018
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -21163,7 +21163,7 @@ PDOMapping=1
 
 [4602sub15]
 ParameterName=Capacitor long term temperature estimate
-ParameterValue=0x000f
+ParameterValue=0x0017
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -21177,7 +21177,7 @@ PDOMapping=1
 
 [4602sub16]
 ParameterName=Current sensor autozero value (M1)
-ParameterValue=0x0016
+ParameterValue=0xfffa
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -21191,7 +21191,7 @@ PDOMapping=1
 
 [4602sub17]
 ParameterName=Current sensor autozero value (M2)
-ParameterValue=0x0040
+ParameterValue=0x0009
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -21261,7 +21261,7 @@ PDOMapping=1
 
 [4602sub20]
 ParameterName=Maximum fluxing current
-ParameterValue=0x0076
+ParameterValue=0x0075
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -21275,7 +21275,7 @@ PDOMapping=1
 
 [4602sub21]
 ParameterName=Maximum iq allowed
-ParameterValue=0x01c1
+ParameterValue=0x0112
 ObjectType=7
 DataType=3
 AccessType=ro
@@ -21859,7 +21859,7 @@ DefaultValue=0
 
 [4612sub3]
 ParameterName=Pt 2 Voltage
-ParameterValue=0x01f0
+ParameterValue=0x01f3
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -21888,7 +21888,7 @@ DefaultValue=0
 
 [4612sub5]
 ParameterName=Pt 3 Voltage
-ParameterValue=0x0220
+ParameterValue=0x028d
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -21917,7 +21917,7 @@ DefaultValue=32767
 
 [4612sub7]
 ParameterName=Pt 4 Voltage
-ParameterValue=0x02c0
+ParameterValue=0x040d
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -21946,7 +21946,7 @@ DefaultValue=32767
 
 [4612sub9]
 ParameterName=Pt 5 Voltage
-ParameterValue=0x02f0
+ParameterValue=0x0452
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -21975,7 +21975,7 @@ DefaultValue=0
 
 [4612subB]
 ParameterName=Pt 6 Voltage
-ParameterValue=0x0343
+ParameterValue=0x0452
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -22004,7 +22004,7 @@ DefaultValue=0
 
 [4612subD]
 ParameterName=Pt 7 Voltage
-ParameterValue=0x0343
+ParameterValue=0x0452
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -22033,7 +22033,7 @@ DefaultValue=0
 
 [4612subF]
 ParameterName=Pt 8 Voltage
-ParameterValue=0x0343
+ParameterValue=0x0452
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -22062,7 +22062,7 @@ DefaultValue=0
 
 [4612sub11]
 ParameterName=Pt 9 Voltage
-ParameterValue=0x0343
+ParameterValue=0x0452
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -23550,7 +23550,7 @@ DefaultValue=0
 
 [4630sub9]
 ParameterName=Actual sin minimum (trough) voltage
-ParameterValue=0x05bb
+ParameterValue=0x05a9
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -23565,7 +23565,7 @@ PDOMapping=1
 
 [4630subA]
 ParameterName=Actual sin maximum (peak) voltage
-ParameterValue=0x0b0c
+ParameterValue=0x0ad6
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -23580,7 +23580,7 @@ PDOMapping=1
 
 [4630subB]
 ParameterName=Actual cos minimum (trough) voltage
-ParameterValue=0x05ba
+ParameterValue=0x05a4
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -23595,7 +23595,7 @@ PDOMapping=1
 
 [4630subC]
 ParameterName=Actual cos maximum (peak) voltage
-ParameterValue=0x0af7
+ParameterValue=0x0ad9
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -23819,7 +23819,7 @@ DefaultValue=0
 
 [4641sub2]
 ParameterName=Maximum Stator Current (Is max)
-ParameterValue=0x01c2
+ParameterValue=0x0113
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -23899,7 +23899,7 @@ DefaultValue=1
 
 [4641subC]
 ParameterName=Nominal battery voltage
-ParameterValue=0x0240
+ParameterValue=0x0300
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -25585,7 +25585,7 @@ PDOMapping=1
 
 [46D0sub5]
 ParameterName=Analog input 5 resistance
-ParameterValue=0x022d
+ParameterValue=0xffff
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -25701,7 +25701,7 @@ DefaultValue=49
 
 [5100sub1]
 ParameterName=Battery Voltage
-ParameterValue=0x0288
+ParameterValue=0x0302
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -25729,7 +25729,7 @@ PDOMapping=1
 
 [5100sub3]
 ParameterName=Capacitor Voltage
-ParameterValue=0x028a
+ParameterValue=0x0302
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -25743,7 +25743,7 @@ PDOMapping=1
 
 [5100sub4]
 ParameterName=Heatsink Temperature
-ParameterValue=0x10
+ParameterValue=0x18
 ObjectType=7
 DataType=2
 AccessType=ro
@@ -25755,7 +25755,7 @@ PDOMapping=1
 
 [5100sub6]
 ParameterName=Battery Voltage (8-bit)
-ParameterValue=0xa2
+ParameterValue=0xc0
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -25768,7 +25768,7 @@ PDOMapping=1
 
 [5100sub7]
 ParameterName=Capacitor Voltage (8-bit)
-ParameterValue=0xa2
+ParameterValue=0xc0
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -25781,7 +25781,7 @@ PDOMapping=1
 
 [5100sub8]
 ParameterName=Logic 12V supply
-ParameterValue=0x0ce4
+ParameterValue=0x0d75
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -25795,7 +25795,7 @@ PDOMapping=1
 
 [5110]
 ParameterName=NMT State
-ParameterValue=0x05
+ParameterValue=0x7f
 ObjectType=7
 DataType=5
 AccessType=ro
@@ -25848,7 +25848,7 @@ DefaultValue=3
 
 [5200sub1]
 ParameterName=Hours
-ParameterValue=0x0001
+ParameterValue=0x0009
 ObjectType=7
 DataType=6
 AccessType=rw
@@ -25862,7 +25862,7 @@ ObjFlags=0x1
 
 [5200sub2]
 ParameterName=Minutes / Seconds
-ParameterValue=0x00
+ParameterValue=0x1f
 ObjectType=7
 DataType=5
 AccessType=rw
@@ -26082,7 +26082,7 @@ DefaultValue=9
 
 [5600sub1]
 ParameterName=System FIFO
-ParameterValue=0x00040000000000e10000240100040000000000d80000240100040000000000bc00002401000400000000007300002401000100000000007200002401000400000000006b00002401000100000000006900002401000400000000005d00002401000100000000004e00002401000c00c10020003b00003441
+ParameterValue=0x000400000000000b00092401000100000000000b0009240100040000000000030009240100010000000000020009240100040000000000dc0008240100010000000000dc0008240100040000000000bc0008240100010000000000bc00082401000c00c1002000ce00043441000100db0020000200003441
 ObjectType=7
 DataType=15
 AccessType=ro
@@ -26094,7 +26094,7 @@ ObjFlags=0x1
 
 [5600sub2]
 ParameterName=Faults FIFO
-ParameterValue=0x00430041004d00500000000200020072000045c300020001002c007200005044000000040003007200004f410000000000000069000046810000000200020069000045c300020001002c006900005044000000040003006900004f410000000000020068000045c3000000000000004e00004681000000020002004e000045c40003000d0029004e00005044000700360029004e00005043000000040003004e00004f41000000000000003b00004681000000020002003b000045c40003000d0029003b00005044000700360029003b00005043000000040003003b00004f410000000000000030000046810000000200020030000045c40000000200010017000045c50000000200010017000045c50000000000000008000046810000000200020000000045c50000000000000000000049810000000200020000000045c4
+ParameterValue=0x00430041004d00500000000200000061000652c10000000200000061000652c10000000200000050000652c10000000200000049000652c1000000000000003a00065308000000ff0001003a000653060000000200000029000652c10000000200000074000552c10000000200000058000552c100000000000000260005530b00000002000000ce0004518200080013002900ce0004504400030011002900ce00045043000000020000003d00045182000800130029003d00045044000300110029003d00045043000000020000003600045182000800130029003600045044000300110029003600045043000000020000003500045182000800130029003500045044000300110029003500045043000000020000003100045182000800130029003100045044000300110029003100045043000000020000001600045182
 ObjectType=7
 DataType=15
 AccessType=ro
@@ -26106,7 +26106,7 @@ ObjFlags=0x1
 
 [5600sub3]
 ParameterName=Event Counters
-ParameterValue=0x0003007200000068000045c30001003b0000003b00003441000400720000003b000050440002004e0000003b00005043000400720000003b00004f41000600720000000800004681000c00e10000000700002401000100a7000000a700004884000200a700000000000049810004004e00000000000045c4
+ParameterValue=0x0001003a0006003a00065308000b004700080058000552c1000100b0000500b000054f01002d000b0009002900062401000100070009000700095043000600960007002e00074f410035009d00070004000050440001004c0007004c000752c40001003a0006003a00065306000200ce0004000200003441
 ObjectType=7
 DataType=15
 AccessType=ro
@@ -26118,7 +26118,7 @@ ObjFlags=0x1
 
 [5600sub4]
 ParameterName=Customer Operational Monitor
-ParameterValue=0x0010000e0bc7fffc80007fff00380000028b00a1028d0191
+ParameterValue=0x001e001578ae800080007fff00320000032601f5043a01e2
 ObjectType=7
 DataType=15
 AccessType=ro
@@ -26130,7 +26130,7 @@ ObjFlags=0x1
 
 [5600sub5]
 ParameterName=BorgWarner Operational Monitor
-ParameterValue=0x0010000e0b7dfffc80007fff00290000028a00c1028d020e
+ParameterValue=0x001c00170e50fc1a80007fff001e0000031d0207031e01f4
 ObjectType=7
 DataType=15
 AccessType=ro
@@ -26154,7 +26154,7 @@ ObjFlags=0x1
 
 [5600sub7]
 ParameterName=Debug
-ParameterValue=0x0000000900010002000000010000000000010017000045c5000000000000000800004681000007d007d00000000007d007d007d0f0600fa000004981000000020000000000000000
+ParameterValue=0x000800000029000000040000000300000029003500045043000000020000003100045182000800000000000000000000000000000000000000045043000000020000000000000000
 ObjectType=7
 DataType=15
 AccessType=ro
@@ -26770,7 +26770,7 @@ PDOMapping=0
 
 [5620]
 ParameterName=Configuration Checksum
-ParameterValue=0xc988
+ParameterValue=0xfe34
 ObjectType=7
 DataType=6
 AccessType=ro
@@ -27264,7 +27264,7 @@ ObjFlags=0x3
 
 [5800]
 ParameterName=Master / Slave configuration
-ParameterValue=0x01
+ParameterValue=0x00
 ObjectType=7
 DataType=1
 AccessType=rw

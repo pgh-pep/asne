@@ -55,7 +55,7 @@ class SystemController(Node):
     def timer_callback(self):
         msg = State()
         msg.state = self.current_state
-        self.state_pub(msg)
+        self.state_pub.publish(msg)
 
 
 def main(args=None):
