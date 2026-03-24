@@ -99,7 +99,7 @@ class WaypointManagerNode(Node):
             self.get_logger().warn("Desired wp is None")
             return
 
-        self.waypoint_pub.publish(pose)
+        self.waypoint_pub.publish(pose.position)
 
     def get_next_waypoint(self, request: NextWaypoint.Request, response: NextWaypoint.Response):
         self.current_path_idx += 1
