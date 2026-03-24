@@ -3,6 +3,9 @@
 from typing import Tuple
 
 import rclpy
+import numpy as np
+import matplotlib.pyplot as plt 
+import math
 from rclpy.node import Node
 from math import atan2, pi, sin, cos, sqrt
 from geometry_msgs.msg import Point, Pose, PoseStamped
@@ -25,7 +28,7 @@ class WaypointManagerNode(Node):
 
         self.declare_parameter("lane_width", 15.0)  # m
         self.declare_parameter("turn_rad", 10.0)  # m
-        self.declare_parameter("turn_points", 4)
+        self.declare_parameter("turn_points", 6)
 
         self.waypoint_thresh: float = self.get_parameter("waypoint_thresh").value
         self.n_laps: int = self.get_parameter("laps").value
@@ -53,6 +56,13 @@ class WaypointManagerNode(Node):
 
         self.reset_path_srv = self.create_service(Trigger, "asne/reset_path", self.reset_path)
 
+        # path = self.generate_path()
+        # plt.scatter([d.pose.position.x for d in list(path.poses)], [d.pose.position.y for d in list(path.poses)])
+        # ax = plt.gca()
+        # ax.set_aspect('equal')
+        # ax.grid(True)
+        # plt.show()
+
         # UNUSED: client to signal race completed
         self.race_over_client = self.create_client(Trigger, "asne/race_completed")
 
@@ -63,7 +73,23 @@ class WaypointManagerNode(Node):
         path.header.stamp = self.get_clock().now().to_msg()
         path.header.frame_id = "map"  # check
 
-        # TODO once recieve more information about the desired path
+        B = np.array(self.gps_to_enu(self.WP_B_lat, self.WP_B_lon))
+        r = self.turn_rad # distance between waypoints and foci in meters
+        theta = atan2(B[1], B[0])
+
+        base_angles = (math.pi/(self.turn_points-1)) * np.arange(0, self.turn_points)
+        B_angles = base_angles + (theta - math.pi/2)
+        B_vectors = B + r * np.array([[cos(d), sin(d)] for d in B_angles])
+        A_angles = -base_angles + (theta - math.pi/2)
+        A_vectors = r * np.array([[cos(d), sin(d)] for d in A_angles])
+        vectors = np.concatenate((B_vectors, A_vectors), axis=0)
+
+        for i in range(self.turn_points * 2):
+            output_pose = PoseStamped()
+            output_pose.pose.position.x = vectors[i][0]
+            output_pose.pose.position.y = vectors[i][1]
+            path.poses.append(output_pose)
+    
         return path
 
     def waypoint_timer_callback(self):
