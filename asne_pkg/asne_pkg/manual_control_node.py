@@ -23,6 +23,8 @@ class ManualContolNode(Node):
         self.heading_pub = self.create_publisher(Float64, "/asne/heading/manual", 10)
         self.velocity_pub = self.create_publisher(Float64, "/asne/velocity/manual", 10)
 
+        self.input_loop = self.create_timer(0.1, self.update_publishers)
+
     def rc_msg_callback(self, msg: RCcontroller):
         # Right joystick: linear velocity
         # Left joystick: desired heading
@@ -33,6 +35,7 @@ class ManualContolNode(Node):
         y: float = msg.joy_l_ud
         self.desired_heading = math.atan2(y, x)
 
+    def update_publishers(self):
         self.heading_pub.publish(Float64(data=self.desired_heading))
         self.velocity_pub.publish(Float64(data=self.desired_linear_velocity))
 
