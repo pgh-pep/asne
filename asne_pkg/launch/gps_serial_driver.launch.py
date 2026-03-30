@@ -3,6 +3,7 @@
 from launch_ros.actions import Node
 from launch import LaunchDescription
 
+
 def generate_launch_description():
     nmea_navsat = Node(
         package="nmea_navsat_driver",
@@ -10,7 +11,7 @@ def generate_launch_description():
         name="gps_serial_driver",
         output="screen",
         parameters=[
-            {"port": "/dev/ttyUSB1"},
+            {"port": "/dev/ttyACM0"},  # /dev/ttyACM0 or /dev/ttyUSB1
             {"baud": 38400},
         ],
         remappings=[

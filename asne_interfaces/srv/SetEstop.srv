@@ -1,0 +1,4 @@
+Estop type
+bool enable
+---
+bool success

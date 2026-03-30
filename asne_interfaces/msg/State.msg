@@ -1,7 +1,5 @@
 uint8 MANUAL=0
 uint8 AUTONOMOUS=1
-uint8 RC_ESTOP=2
-uint8 GPS_ESTOP=3
-uint8 STATIONARY=4
+uint8 STATIONARY=2
 
 uint8 state

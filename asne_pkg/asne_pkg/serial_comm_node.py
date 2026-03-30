@@ -14,12 +14,15 @@ class SerialCommNode(Node):
         super().__init__("serial_comm_node")
 
         self.declare_parameter("serial_port", "/dev/ttyUSB0")
-        self.serial_port: str = self.get_parameter("serial_port").value
+        self.serial_port: str = self.get_parameter("serial_port").get_parameter_value().string_value
 
-        self.serial_ESP = serial.Serial(self.serial_port, BAUD_RATE, timeout=0.1)
+        self.declare_parameter("baud", 115200)
+        self.baud: int = self.get_parameter("baud").get_parameter_value().integer_value
+
+        self.serial_ESP = serial.Serial(self.serial_port, self.baud, timeout=0.1)
         time.sleep(2.5)
 
-        self.get_logger().info(f"opened serial comms w/ ESP on {self.serial_port} at {BAUD_RATE}")
+        self.get_logger().info(f"opened serial comms w/ ESP on {self.serial_port} at {self.baud}")
 
         self.servo_sub = self.create_subscription(Float64, "asne/servo_angle", self.servo_callback, 10)
         self.rc_raw_pub = self.create_publisher(String, "asne/rc/raw_string", 10)
@@ -35,7 +38,8 @@ class SerialCommNode(Node):
             return
 
         msg: String = String()
-        msg.data = raw
+        msg.data = str(raw)[2:][:-5]
+        # self.get_logger().info(msg.data)
         self.rc_raw_pub.publish(msg)
 
     def servo_callback(self, msg: Float64):
@@ -50,7 +54,7 @@ class SerialCommNode(Node):
         super().destroy_node()
 
 
-def main(args=None):
+def main(args=None):  # type: ignore
     rclpy.init(args=args)
     serial_comm_node = SerialCommNode()
     try:

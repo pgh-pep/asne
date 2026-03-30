@@ -22,8 +22,8 @@ class LOSGuidanceNode(Node):
         self.declare_parameter("lookahead_dist", 10.0)  # m
         self.declare_parameter("waypoint_thresh", 10.0)  # m
 
-        self.lookahead_dist: float = self.get_parameter("lookahead_dist").value
-        self.waypoint_thresh: float = self.get_parameter("waypoint_thresh").value
+        self.lookahead_dist: float = self.get_parameter("lookahead_dist").get_parameter_value().double_value
+        self.waypoint_thresh: float = self.get_parameter("waypoint_thresh").get_parameter_value().double_value
 
         # all waypoints in ENU (m) -> (east = x, north = y)
         # WP_A will be init as (0,0)
@@ -31,7 +31,7 @@ class LOSGuidanceNode(Node):
         self.y: float | None = None
         self.heading: float | None = None
         self.twist: Twist | None = None
-        self.odom_ts: Time = None
+        self.odom_ts: Time | None = None
 
         self.prev_wp: Tuple[float, float] | None = None
         self.curr_wp: Tuple[float, float] | None = None
@@ -57,8 +57,9 @@ class LOSGuidanceNode(Node):
         self.get_logger().info("fetching next wp:")
         self.request_next_waypoint()
 
-    def odom_callback(self, msg: Odometry):
-        self.odom_ts = msg.header.stamp
+    def odom_callback(self, msg: Odometry) -> None:
+        self.odom_ts = Time.from_msg(msg.header.stamp)
+
         self.x = msg.pose.pose.position.x
         self.y = msg.pose.pose.position.y
 
@@ -69,7 +70,7 @@ class LOSGuidanceNode(Node):
         _, _, yaw = euler_from_quaternion(quaternion)
         self.heading = yaw
 
-    def request_next_waypoint(self):
+    def request_next_waypoint(self) -> None:
         self.requesting_wp = True
         future = self.next_wp_client.call_async(NextWaypoint.Request())
         future.add_done_callback(self.waypoint_callback)
@@ -83,8 +84,8 @@ class LOSGuidanceNode(Node):
 
         wp: Point = result.waypoint
         if self.curr_wp is None:
-            # first waypoint — seed prev from boat position if known
-            self.prev_wp = (self.x, self.y) if self.x is not None else (wp.x, wp.y)
+            # for the first waypoint, use current pose
+            self.prev_wp = (self.x, self.y) if (self.x is not None and self.y is not None) else (wp.x, wp.y)
         else:
             self.prev_wp = self.curr_wp
 
@@ -114,7 +115,7 @@ class LOSGuidanceNode(Node):
             # send service to switch to manual mode
             return
 
-        if self.curr_wp is None:
+        if self.curr_wp is None or self.prev_wp is None:
             self.get_logger().warn("No waypoint received yet", throttle_duration_sec=2.0)
             return
 
@@ -132,8 +133,8 @@ class LOSGuidanceNode(Node):
         # path angle
         alpha = atan2(curr_wp[1] - prev_wp[1], curr_wp[0] - prev_wp[0])
 
-        # cross track error (XTE)
-        xte = -(x - prev_wp[0]) * sin(alpha) + (y - prev_wp[1]) * cos(alpha)
+        # cross track error (XTE) -> positive XTE = boat on right of path
+        xte = (x - prev_wp[0]) * sin(alpha) - (y - prev_wp[1]) * cos(alpha)
 
         # TODO: test if integral term needed
         ki = 0
@@ -160,7 +161,7 @@ class LOSGuidanceNode(Node):
         self.heading_pub.publish(Float64(data=psi_d))
 
 
-def main(args=None):
+def main(args=None):  # type: ignore
     rclpy.init(args=args)
     los_guidance_node = LOSGuidanceNode()
     try:

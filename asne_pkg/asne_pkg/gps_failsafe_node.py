@@ -4,7 +4,7 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import NavSatFix
 from rclpy.time import Time
-from asne_interfaces.msg import State
+# from asne_interfaces.msg import State
 from asne_interfaces.srv import SetState
 from std_srvs.srv import Trigger
 
@@ -25,8 +25,11 @@ class GPSFailsafeNode(Node):
         self.set_state_client = self.create_client(SetState, "/asne/set_state")
         self.reset_estop_client = self.create_client(Trigger, "/asne/reset_estop")
 
+    def gps_startup(self):
+        pass
+
     def gps_callback(self, msg: NavSatFix):
-        self.last_gps_time = msg.header.stamp
+        self.last_gps_time = Time.from_msg(msg.header.stamp)
         if self.gps_failsafe_active:
             self.get_logger().info("recovered GPS signal, stopping estop")
             self.gps_failsafe_active = False
@@ -47,7 +50,7 @@ class GPSFailsafeNode(Node):
 
             if self.set_state_client.wait_for_service(timeout_sec=0.2):
                 req = SetState.Request()
-                req.state = State.GPS_ESTOP
+
                 self.set_state_client.call_async(req)
             else:
                 self.get_logger().error("failed to activate rc failsafe")
