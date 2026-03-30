@@ -56,12 +56,7 @@ class WaypointManagerNode(Node):
 
         self.reset_path_srv = self.create_service(Trigger, "asne/reset_path", self.reset_path)
 
-        # path = self.generate_path()
-        # plt.scatter([d.pose.position.x for d in list(path.poses)], [d.pose.position.y for d in list(path.poses)])
-        # ax = plt.gca()
-        # ax.set_aspect('equal')
-        # ax.grid(True)
-        # plt.show()
+        self.debug_waypoint_generator()
 
         # UNUSED: client to signal race completed
         self.race_over_client = self.create_client(Trigger, "asne/race_completed")
@@ -100,6 +95,15 @@ class WaypointManagerNode(Node):
             return
 
         self.waypoint_pub.publish(pose.position)
+
+    def debug_waypoint_generator(self):
+        path = self.generate_path()
+        plt.scatter([d.pose.position.x for d in list(path.poses)], [d.pose.position.y for d in list(path.poses)])
+        ax = plt.gca()
+        ax.set_aspect('equal')
+        ax.grid(True)
+        plt.show()
+
 
     def get_next_waypoint(self, request: NextWaypoint.Request, response: NextWaypoint.Response):
         self.current_path_idx += 1
