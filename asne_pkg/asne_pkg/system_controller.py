@@ -4,6 +4,7 @@ import rclpy
 from rclpy.node import Node
 from asne_interfaces.msg import State, Estop
 from asne_interfaces.srv import SetState, SetEstop
+from std_srvs.srv import Trigger
 
 
 class SystemControllerNode(Node):
@@ -15,15 +16,22 @@ class SystemControllerNode(Node):
         self.rc_estop_enabled: bool = False
         self.manual_estop_enabled: bool = False
 
+        self.gps_init: bool = False
+
         self.state_pub = self.create_publisher(State, "/asne/state", 10)
         self.set_state_service = self.create_service(SetState, "/asne/set_state", self.set_state)
 
         self.estop_service = self.create_service(SetEstop, "/asne/estop", self.estop_service_callback)
+        self.gps_init_servive = self.create_service(Trigger, "/gps/initialized", self.gps_init_callback)
 
         self.state_pub_timer = self.create_timer(0.5, self.state_pub_timer)  # type: ignore
 
     def is_estop_enabled(self) -> bool:
         return self.gps_estop_enabled or self.rc_estop_enabled or self.manual_estop_enabled
+
+    def gps_init_callback(self, _: Trigger.Request, response: Trigger.Response) -> Trigger.Response:
+        self.gps_init = True
+        return response
 
     # NOTE: only send service when trying to change state
     def set_state(self, request: SetState.Request, response: SetState.Response):
@@ -47,8 +55,11 @@ class SystemControllerNode(Node):
                 self.get_logger().info("Entering manual mode")
                 self.current_state = State.MANUAL
             case State.AUTONOMOUS:
-                self.get_logger().info("Entering autonomous mode")
-                self.current_state = State.AUTONOMOUS
+                if not self.gps_init:
+                    self.get_logger().info("No GPS fix, cannot enter autonomous mode")
+                else:
+                    self.get_logger().info("Entering autonomous mode")
+                    self.current_state = State.AUTONOMOUS
                 # send reset signal to waypoint generator?
             case State.STATIONARY:
                 self.get_logger().info("Entering stationary mode")

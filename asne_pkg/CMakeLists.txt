@@ -20,6 +20,7 @@ install(PROGRAMS
     ${PROJECT_NAME}/servo_control_node.py
     ${PROJECT_NAME}/manual_control_node.py
     ${PROJECT_NAME}/motor_control_node.py
+    ${PROJECT_NAME}/sim_bridge_node.py
     DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -40,5 +41,5 @@ install(TARGETS
 
 ament_auto_package(
     USE_SCOPED_HEADER_INSTALL_DIR
-    INSTALL_TO_SHARE launch config rviz
+    INSTALL_TO_SHARE launch config rviz urdf
 )
