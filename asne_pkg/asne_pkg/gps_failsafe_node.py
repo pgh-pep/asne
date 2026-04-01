@@ -4,6 +4,7 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import NavSatFix
 from rclpy.time import Time
+
 # from asne_interfaces.msg import State
 from asne_interfaces.srv import SetState
 from std_srvs.srv import Trigger
@@ -19,14 +20,15 @@ class GPSFailsafeNode(Node):
         self.gps_failsafe_active: bool = False
         self.last_gps_time: Time | None = None
 
+        self.gps_init: bool = False
+
         self.gps_sub = self.create_subscription(NavSatFix, "/gps/fix", self.gps_callback, 10)
-        self.check_expiration_timer = self.create_timer(0.5, self.check_gps_expiration)
+        self.gps_watchdog_timer = self.create_timer(0.5, self.gps_watchdog)
+
+        self.gps_init_client = self.create_client(Trigger, "/gps/initialized")
 
         self.set_state_client = self.create_client(SetState, "/asne/set_state")
         self.reset_estop_client = self.create_client(Trigger, "/asne/reset_estop")
-
-    def gps_startup(self):
-        pass
 
     def gps_callback(self, msg: NavSatFix):
         self.last_gps_time = Time.from_msg(msg.header.stamp)
@@ -39,15 +41,24 @@ class GPSFailsafeNode(Node):
             else:
                 self.get_logger().error("failed to reset estop")
 
-    def check_gps_expiration(self):
+    def gps_watchdog(self):
         if self.last_gps_time is None:
             return
+
+        if not self.gps_init:
+            self.gps_init = True
+            if self.gps_init_client.service_is_ready():
+                req: Trigger = Trigger()
+                self.gps_init_client.call_async(req)
+            else:
+                self.get_logger().error("failed to validate gps working")
 
         elapsed = (self.get_clock().now() - self.last_gps_time).nanoseconds * 1e-9
         if elapsed > self.timeout and not self.gps_failsafe_active:
             self.gps_failsafe_active = True
             self.get_logger().warn("GPS signal lost :(")
 
+            # TODO: FIX GPS ESTOP
             if self.set_state_client.wait_for_service(timeout_sec=0.2):
                 req = SetState.Request()
 
