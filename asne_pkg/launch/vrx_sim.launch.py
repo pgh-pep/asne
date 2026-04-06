@@ -43,6 +43,8 @@ def launch_setup(context, *args, **kwargs):
         executable="navsat_transform_node",
         remappings=[
             ("gps/fix", "/wamv/sensors/gps/gps/fix"),
+            ("imu/data", "/wamv/sensors/imu/imu/data"),
+            ("odometry/filtered", "/odometry/filtered"),
         ],
         parameters=[
             sim_localization_params,
@@ -83,24 +85,22 @@ def launch_setup(context, *args, **kwargs):
     )
 
     # VISUALIZATION/TESTING
-    # rviz_config_file = os.path.join(asne_directory, "rviz", "gazebo.rviz")
+    rviz_config_file = os.path.join(asne_directory, "rviz", "gazebo.rviz")
 
-    # rviz = Node(
-    #     package="rviz2",
-    #     executable="rviz2",
-    #     parameters=[{"use_sim_time": True}],
-    #     name="rviz2",
-    #     output="screen",
-    #     arguments=["-d", rviz_config_file],
-    #     condition=IfCondition(LaunchConfiguration("rviz")),
-    # )
+    rviz = Node(
+        package="rviz2",
+        executable="rviz2",
+        parameters=[{"use_sim_time": True}],
+        name="rviz2",
+        output="screen",
+        arguments=["-d", rviz_config_file],
+    )
 
     sim_bridge = Node(
         package="asne_pkg",
         executable="sim_bridge_node.py",
         name="sim_bridge_node",
         output="screen",
-
     )
 
     return [
@@ -108,8 +108,8 @@ def launch_setup(context, *args, **kwargs):
         ekf_node,
         navsat_transform_node,
         static_transform_publisher_node,
-        sim_bridge,
-        # rviz,
+        # sim_bridge,
+        rviz,
     ]
 
 

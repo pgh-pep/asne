@@ -34,7 +34,8 @@ class SimBridgeNode(Node):
 
         self.pos_pub.publish(pos_msg)
         self.thrust_pub.publish(thrust_msg)
-        self.get_logger().info(f'Publishing pos={self.heading:.3f} thrust={self.velocity:.3f}')
+        self.get_logger().info(f"Publishing pos={self.heading:.3f} thrust={self.velocity:.3f}")
+
 
 def main(args=None):  # type: ignore
     rclpy.init(args=args)
