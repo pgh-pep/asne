@@ -7,7 +7,7 @@ sudo apt install ros-humble-nmea-navsat-driver
 
 can stuff:
 ```bash
-pip install canopen python-can
+pip install canopen python-can pyserial
 
 sudo modprobe can
 sudo modprobe can_raw
