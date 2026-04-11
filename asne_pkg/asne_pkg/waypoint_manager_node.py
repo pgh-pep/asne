@@ -13,7 +13,6 @@ from nav_msgs.msg import Path
 from std_srvs.srv import Trigger
 from asne_interfaces.srv import NextWaypoint
 
-
 class WaypointManagerNode(Node):
     def __init__(self):
         super().__init__("waypoint_manager_node")
@@ -30,19 +29,19 @@ class WaypointManagerNode(Node):
         self.declare_parameter("turn_rad", 10.0)  # m
         self.declare_parameter("turn_points", 6)
 
-        self.waypoint_thresh: float = self.get_parameter("waypoint_thresh").value
-        self.n_laps: int = self.get_parameter("laps").value
+        self.waypoint_thresh: float = self.get_parameter("waypoint_thresh").get_parameter_value().double_value
+        self.n_laps: int = self.get_parameter("laps").get_parameter_value().integer_value
 
-        self.WP_A_lat: float = self.get_parameter("WP_A_lat").value
-        self.WP_A_lon: float = self.get_parameter("WP_A_lon").value
-        self.WP_B_lat: float = self.get_parameter("WP_B_lat").value
-        self.WP_B_lon: float = self.get_parameter("WP_B_lon").value
+        self.WP_A_lat: float = self.get_parameter("WP_A_lat").get_parameter_value().double_value
+        self.WP_A_lon: float = self.get_parameter("WP_A_lon").get_parameter_value().double_value
+        self.WP_B_lat: float = self.get_parameter("WP_B_lat").get_parameter_value().double_value
+        self.WP_B_lon: float = self.get_parameter("WP_B_lon").get_parameter_value().double_value
 
         self.origin = (self.WP_A_lat, self.WP_A_lon)
 
-        self.lane_width: float = self.get_parameter("lane_width").value
-        self.turn_rad: float = self.get_parameter("turn_rad").value
-        self.turn_points: float = self.get_parameter("turn_points").value
+        self.lane_width: float = self.get_parameter("lane_width").get_parameter_value().double_value
+        self.turn_rad: float = self.get_parameter("turn_rad").get_parameter_value().double_value
+        self.turn_points: int = self.get_parameter("turn_points").get_parameter_value().integer_value
 
         # all waypoints in ENU (m) -> (east = x, north = y)
         # (0,0) will b einti as WP_A
@@ -141,7 +140,7 @@ class WaypointManagerNode(Node):
         return (x, y)
 
 
-def main(args=None):
+def main(args=None): #type: ignore
     rclpy.init(args=args)
     waypoint_manager_node = WaypointManagerNode()
     try:

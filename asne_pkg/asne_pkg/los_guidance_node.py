@@ -9,7 +9,8 @@ from geometry_msgs.msg import Point, Twist
 from std_msgs.msg import Float64
 from nav_msgs.msg import Odometry
 from tf_transformations import euler_from_quaternion
-from rclpy.time import Time
+from builtin_interfaces.msg import Time
+# from rclpy.clock import Time
 from asne_interfaces.srv import NextWaypoint
 
 import rclpy.task
@@ -41,12 +42,13 @@ class LOSGuidanceNode(Node):
 
         self.odom_sub = self.create_subscription(
             Odometry,
-            "odometry/filtered",
+            "/odometry/filtered",
             self.odom_callback,
             10,
         )
 
-        self.heading_pub = self.create_publisher(Float64, "asne/heading/manual", 10)
+        self.heading_pub = self.create_publisher(Float64, "/asne/heading/manual", 10)
+        self.velocity_pub = self.create_publisher(Float64, "/asne/velocity/manual", 10)
 
         self.next_wp_client = self.create_client(NextWaypoint, "asne/next_waypoint")
         self.los_timer = self.create_timer(0.1, self.LOS_guidance)
@@ -58,7 +60,7 @@ class LOSGuidanceNode(Node):
         self.request_next_waypoint()
 
     def odom_callback(self, msg: Odometry) -> None:
-        self.odom_ts = Time.from_msg(msg.header.stamp)
+        self.odom_ts = msg.header.stamp
 
         self.x = msg.pose.pose.position.x
         self.y = msg.pose.pose.position.y
@@ -107,7 +109,8 @@ class LOSGuidanceNode(Node):
         if self.odom_ts is None:
             return
 
-        dt = (self.get_clock().now() - Time.from_msg(self.odom_ts)).nanoseconds * 1e-9
+        dt = (self.get_clock().now().to_msg().nanosec - self.odom_ts.nanosec) * 1e-9
+        self.get_logger().info(f"dt={dt}")
         odom_expiration_thresh = 1.0  # s
 
         if dt > odom_expiration_thresh:
@@ -128,6 +131,7 @@ class LOSGuidanceNode(Node):
         if prev_wp == curr_wp:
             psi_d = atan2(curr_wp[1] - y, curr_wp[0] - x)
             self.heading_pub.publish(Float64(data=psi_d))
+            # self.velocity_pub.publish(Float64(data=50.0))
             return
 
         # path angle
@@ -159,6 +163,7 @@ class LOSGuidanceNode(Node):
             self.request_next_waypoint()
 
         self.heading_pub.publish(Float64(data=psi_d))
+        # self.velocity_pub.publish(Float64(data=10.0))
 
 
 def main(args=None):  # type: ignore

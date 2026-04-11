@@ -21,6 +21,7 @@ install(PROGRAMS
     ${PROJECT_NAME}/manual_control_node.py
     ${PROJECT_NAME}/motor_control_node.py
     ${PROJECT_NAME}/sim_bridge_node.py
+    ${PROJECT_NAME}/los_guidance_node.py
     DESTINATION lib/${PROJECT_NAME}
 )
 

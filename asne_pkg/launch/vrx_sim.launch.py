@@ -108,7 +108,7 @@ def launch_setup(context, *args, **kwargs):
         ekf_node,
         navsat_transform_node,
         static_transform_publisher_node,
-        # sim_bridge,
+        sim_bridge,
         rviz,
     ]
 
