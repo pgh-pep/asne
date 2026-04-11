@@ -1,5 +1,14 @@
 # asne
 
+ssh nvidia@192.168.55.1
+
+sudo chmod +x /etc/rc.local
+sudo systemctl enable rc-local
+
+sudo usermod -a -G dialout $USER
+
+https://www.digikey.com/en/products/detail/mh-connectors/MHCCOV-9-SC-LG/16983971?gclsrc=aw.ds&gad_source=1&gad_campaignid=17336967819&gbraid=0AAAAADrbLliTyznh3APuOw4qZ3tjLSulT&gclid=EAIaIQobChMI88j2r5rckwMVgVxHAR01JQx_EAQYAiABEgKoF_D_BwE
+
 install gps drivers:
 ```bash
 sudo apt install ros-humble-nmea-navsat-driver
@@ -7,7 +16,7 @@ sudo apt install ros-humble-nmea-navsat-driver
 
 can stuff:
 ```bash
-pip install canopen python-can pyserial
+pip install canopen python-can smbus2
 
 sudo modprobe can
 sudo modprobe can_raw
