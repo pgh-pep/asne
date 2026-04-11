@@ -40,9 +40,9 @@ def launch_setup(context, *args, **kwargs):
         executable="manual_control_node.py",
         name="manual_control_node",
         output="screen",
-        parameters=[
-            {"max_linear_velocity": 1.0},
-        ],
+        # parameters=[
+        #     {"max_linear_velocity": 1.0},
+        # ],
     )
 
     return [
