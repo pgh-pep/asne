@@ -28,6 +28,12 @@ def generate_launch_description():
         }]
     )
 
+    velocity_heading_mux = Node(
+        package="asne_pkg",
+        executable="velocity_heading_mux.py",
+        name="velocity_heading_mux",
+    )
+
     los_guidance_node = Node(
         package="asne_pkg",
         executable="los_guidance_node.py",
@@ -35,4 +41,4 @@ def generate_launch_description():
         output="screen",
     )
 
-    return LaunchDescription([waypoint_manager_node, los_guidance_node])
+    return LaunchDescription([waypoint_manager_node, los_guidance_node, velocity_heading_mux])

@@ -47,8 +47,8 @@ class LOSGuidanceNode(Node):
             10,
         )
 
-        self.heading_pub = self.create_publisher(Float64, "/asne/heading/manual", 10)
-        self.velocity_pub = self.create_publisher(Float64, "/asne/velocity/manual", 10)
+        self.heading_pub = self.create_publisher(Float64, "/asne/heading/autonomous", 10)
+        self.velocity_pub = self.create_publisher(Float64, "/asne/velocity/autonomous", 10)
 
         self.next_wp_client = self.create_client(NextWaypoint, "asne/next_waypoint")
         self.los_timer = self.create_timer(0.1, self.LOS_guidance)
@@ -78,6 +78,7 @@ class LOSGuidanceNode(Node):
         future.add_done_callback(self.waypoint_callback)
 
     def waypoint_callback(self, future: rclpy.task.Future) -> None:
+        self.get_logger().info("waypoint callback")
         result = future.result()
         if result is None or not result.success:
             self.get_logger().warn("next waypoint request failed")
@@ -110,7 +111,6 @@ class LOSGuidanceNode(Node):
             return
 
         dt = (self.get_clock().now().to_msg().nanosec - self.odom_ts.nanosec) * 1e-9
-        self.get_logger().info(f"dt={dt}")
         odom_expiration_thresh = 1.0  # s
 
         if dt > odom_expiration_thresh:

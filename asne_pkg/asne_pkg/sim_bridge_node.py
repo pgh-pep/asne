@@ -8,8 +8,8 @@ from std_msgs.msg import Float64
 class SimBridgeNode(Node):
     def __init__(self):
         super().__init__("sim_bridge_node")
-        self.heading_sub = self.create_subscription(Float64, "/asne/heading/manual", self.heading_callback, 10)
-        self.velo_sub = self.create_subscription(Float64, "/asne/velocity/manual", self.velocity_callback, 10)
+        self.heading_sub = self.create_subscription(Float64, "/asne/heading/final", self.heading_callback, 10)
+        self.velo_sub = self.create_subscription(Float64, "/asne/velocity/final", self.velocity_callback, 10)
 
         self.timer = self.create_timer(0.5, self.timer_cb)
 

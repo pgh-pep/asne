@@ -55,7 +55,7 @@ class WaypointManagerNode(Node):
 
         self.reset_path_srv = self.create_service(Trigger, "asne/reset_path", self.reset_path)
 
-        self.debug_waypoint_generator()
+        # self.debug_waypoint_generator()
 
         # UNUSED: client to signal race completed
         self.race_over_client = self.create_client(Trigger, "asne/race_completed")
