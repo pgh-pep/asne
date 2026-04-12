@@ -7,7 +7,7 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float64
 
-BAUD_RATE = 115200
+BAUD_RATE = 250000
 
 # TODO: eventually add a P controller to thrust commands to not accelerate as fast
 
@@ -19,49 +19,54 @@ class MotorControlNode(Node):
         self.declare_parameter("dcf_path", "/home/varun/pep/asne_ws/src/asne/asne_pkg/config/sevcon_working.dcf")
         dcf_path: str = self.get_parameter("dcf_path").get_parameter_value().string_value
 
-        # self.declare_parameter("baud", 115200)
+        # self.declare_parameter("baud", 250000)
         # self.baud: str = self.get_parameter("dcf_path").value
         # self.network.connect(interface="ixxat", channel=0, bitrate=250000)
 
         self.network = canopen.Network()
-        self.network.connect(channel="can0", bustype="socketcan")
+        self.network.connect(channel="can0", bustype="socketcan", bitrate=250000)
+
         self.node = self.network.add_node(1, dcf_path)
 
-        self.goal_velocity: float = 0.0
-        self.max_velocity: float = 50
-        self.deadband: float = 0.05
+        self.max_torque_percent: float = 0.20  # percent of motor max
+        self.goal_torque_percent: float = 0.0  # percent of software capped max
 
+        self.deadband: float = 0.05
         self.is_forward = True
 
-        self.velocity_sub = self.create_subscription(Float64, "/asne/velocity/finals", self.velocity_callback, 10)
-
+        self.torque_sub = self.create_subscription(Float64, "/asne/torque/desired", self.torque_callback, 10)
         self.thrust_cmd_timer = self.create_timer(1, self.thrust_timer_callback)
 
         self.init_motor()
+
+    def torque_callback(self, msg: Float64):
+        self.goal_torque_percent = msg.data
 
     def thrust_timer_callback(self):
         # motor_temp = self.node.sdo[0x4600][3].raw
         # self.get_logger().info(f"temp: {motor_temp}Â°C")
 
-        target_torque: float = max(min(self.goal_velocity, self.max_velocity), -self.max_velocity)
-        if abs(target_torque) < self.deadband:
-            target_torque = 0.0
+        if abs(self.goal_torque_percent) < self.deadband:
+            self.goal_torque_percent = 0.0
+
+        self.max_torque_percent
 
         # SEVCONFIELD SCALING=0.1
         # SEVCONFIELD UNITS=% of peak
         # ex 1000 = 100% rated torque.
         # ex. 50 -> 5 % of peak torque
 
-        # if forward mode but want to go reverse
-        self.get_logger().info(f"torque: {target_torque}")
+        self.get_logger().info(f"torque percentage of max: {self.goal_torque_percent * 100}")
+        goal_torque_scaled: int = int(self.goal_torque_percent * 1000 * self.max_torque_percent)
 
-        if target_torque < 0 and self.is_forward:
+        # if forward mode but want to go reverse
+        if self.goal_torque_percent < 0 and self.is_forward:
             self.set_direction(False)
         # check if reverse mode but want to go forward
-        elif target_torque > 0 and not self.is_forward:
+        elif self.goal_torque_percent > 0 and not self.is_forward:
             self.set_direction(True)
 
-        self.node.sdo[0x6071].raw = abs(target_torque)
+        self.node.sdo[0x6071].raw = abs(goal_torque_scaled)
 
     def set_direction(self, forward: bool):
         self.node.sdo[0x6071].raw = 0  # starting torque = 0
@@ -79,7 +84,6 @@ class MotorControlNode(Node):
 
     def init_motor(self):
         self.get_logger().info("BEGINNING SEVCON INITALIZATION!")
-
         self.node.nmt.state = "PRE-OPERATIONAL"
         time.sleep(0.2)
 
@@ -126,9 +130,6 @@ class MotorControlNode(Node):
 
         except Exception as e:
             self.get_logger().warn(f"ERROR reading faults: {e}")
-
-    def velocity_callback(self, msg: Float64):
-        self.goal_velocity = msg.data
 
     def destroy_node(self):
         self.get_logger().info("\nSHUTTING DOWN")

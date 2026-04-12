@@ -62,13 +62,14 @@ class RCDecoderNode(Node):
         self.rc_msg_pub = self.create_publisher(RCcontroller, "/asne/rc/channels", 10)
 
         self.set_state_client = self.create_client(SetState, "/asne/set_state")
-        self.estop_client = self.create_client(SetEstop, "/asne/estop")
+        self.estop_client = self.create_client(SetEstop, "/asne/set_estop")
 
         self.rc_watchdog = self.create_timer(0.1, self.rc_watchdog_callback)
 
     def rc_watchdog_callback(self):
         if self.last_rc_stamp is None:
             return
+
         now = self.get_clock().now()
         rc_msg_expired = (now - self.last_rc_stamp) > Duration(seconds=TIMEOUT)
 

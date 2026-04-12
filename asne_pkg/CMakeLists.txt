@@ -21,7 +21,7 @@ install(PROGRAMS
     ${PROJECT_NAME}/manual_control_node.py
     ${PROJECT_NAME}/motor_control_node.py
     ${PROJECT_NAME}/sim_bridge_node.py
-    ${PROJECT_NAME}/velocity_heading_mux.py
+    ${PROJECT_NAME}/motion_output_mux.py
     ${PROJECT_NAME}/los_guidance_node.py
     ${PROJECT_NAME}/pd_heading_node.py
     ${PROJECT_NAME}/diff_thrust_controller.py

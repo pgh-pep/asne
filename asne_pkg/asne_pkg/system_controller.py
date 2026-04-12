@@ -5,6 +5,7 @@ from rclpy.node import Node
 from asne_interfaces.msg import State, Estop
 from asne_interfaces.srv import SetState, SetEstop
 from std_srvs.srv import Trigger
+from std_msgs.msg import Bool
 
 
 class SystemControllerNode(Node):
@@ -19,9 +20,11 @@ class SystemControllerNode(Node):
         self.gps_init: bool = False
 
         self.state_pub = self.create_publisher(State, "/asne/state", 10)
+        self.estop_active_pub = self.create_publisher(Bool, "/asne/state/estop_active", 10)
+
         self.set_state_service = self.create_service(SetState, "/asne/set_state", self.set_state)
 
-        self.estop_service = self.create_service(SetEstop, "/asne/estop", self.estop_service_callback)
+        self.estop_service = self.create_service(SetEstop, "/asne/set_estop", self.estop_service_callback)
         self.gps_init_servive = self.create_service(Trigger, "/gps/initialized", self.gps_init_callback)
 
         self.state_pub_timer = self.create_timer(0.5, self.state_pub_timer)  # type: ignore
@@ -129,6 +132,13 @@ class SystemControllerNode(Node):
         msg.state = self.current_state
         self.state_pub.publish(msg)
         self.log()
+
+        estop_msg = Bool(data=False)
+
+        if self.is_estop_enabled():
+            estop_msg.data = True
+
+        self.estop_active_pub.publish(estop_msg)
 
     def log(self):
         if self.rc_estop_enabled:
