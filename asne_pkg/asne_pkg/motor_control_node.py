@@ -33,7 +33,7 @@ class MotorControlNode(Node):
 
         self.is_forward = True
 
-        self.velocity_sub = self.create_subscription(Float64, "/asne/velocity/manual", self.velocity_callback, 10)
+        self.velocity_sub = self.create_subscription(Float64, "/asne/velocity/finals", self.velocity_callback, 10)
 
         self.thrust_cmd_timer = self.create_timer(1, self.thrust_timer_callback)
 

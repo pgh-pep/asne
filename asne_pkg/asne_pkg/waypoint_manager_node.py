@@ -42,6 +42,8 @@ class WaypointManagerNode(Node):
         self.lane_width: float = self.get_parameter("lane_width").get_parameter_value().double_value
         self.turn_rad: float = self.get_parameter("turn_rad").get_parameter_value().double_value
         self.turn_points: int = self.get_parameter("turn_points").get_parameter_value().integer_value
+        
+        self.path_pub = self.create_publisher(Path, "asne/goal_path", 10)
 
         # all waypoints in ENU (m) -> (east = x, north = y)
         # (0,0) will b einti as WP_A
@@ -83,6 +85,8 @@ class WaypointManagerNode(Node):
             output_pose.pose.position.x = vectors[i][0]
             output_pose.pose.position.y = vectors[i][1]
             path.poses.append(output_pose)
+
+        self.path_pub.publish(path)
     
         return path
 
@@ -102,7 +106,6 @@ class WaypointManagerNode(Node):
         ax.set_aspect('equal')
         ax.grid(True)
         plt.show()
-
 
     def get_next_waypoint(self, request: NextWaypoint.Request, response: NextWaypoint.Response):
         self.current_path_idx += 1

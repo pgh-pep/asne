@@ -15,7 +15,6 @@ from asne_interfaces.srv import NextWaypoint
 
 import rclpy.task
 
-
 class LOSGuidanceNode(Node):
     def __init__(self):
         super().__init__("los_guidance_node")
@@ -131,7 +130,7 @@ class LOSGuidanceNode(Node):
         if prev_wp == curr_wp:
             psi_d = atan2(curr_wp[1] - y, curr_wp[0] - x)
             self.heading_pub.publish(Float64(data=psi_d))
-            # self.velocity_pub.publish(Float64(data=50.0))
+            self.velocity_pub.publish(Float64(data=1.0))
             return
 
         # path angle
@@ -163,7 +162,7 @@ class LOSGuidanceNode(Node):
             self.request_next_waypoint()
 
         self.heading_pub.publish(Float64(data=psi_d))
-        # self.velocity_pub.publish(Float64(data=10.0))
+        self.velocity_pub.publish(Float64(data=1.0))
 
 
 def main(args=None):  # type: ignore

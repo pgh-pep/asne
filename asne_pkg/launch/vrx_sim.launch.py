@@ -19,7 +19,7 @@ def launch_setup(context, *args, **kwargs):
     resource_path = os.environ.get("GZ_SIM_RESOURCE_PATH", "")
     os.environ["GZ_SIM_RESOURCE_PATH"] = f"{resource_path}:{vrx_worlds_directory}"
 
-    model_path = os.path.join(asne_directory, "urdf", "wamv_target.urdf")
+    model_path = os.path.join(asne_directory, "urdf", "diff_thrust_wamv", "wamv_target.urdf")
     world = "sydney_regatta"
 
     vrx_sim_launch = IncludeLaunchDescription(
@@ -51,6 +51,12 @@ def launch_setup(context, *args, **kwargs):
             {"datum": [lat, lon, 0.0]},  # comment out to set origin at first gps reading
         ],
         arguments=["--ros-args", "--log-level", "navsat_transform_node:=WARN"],
+    )
+
+    diff_thrust_controller = Node(
+        package="asne_pkg",
+        executable="diff_thrust_controller.py",
+        name="diff_thrust_controller",
     )
 
     ekf_node = Node(
@@ -110,6 +116,7 @@ def launch_setup(context, *args, **kwargs):
         static_transform_publisher_node,
         sim_bridge,
         rviz,
+        diff_thrust_controller
     ]
 
 

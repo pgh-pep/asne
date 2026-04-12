@@ -23,6 +23,8 @@ install(PROGRAMS
     ${PROJECT_NAME}/sim_bridge_node.py
     ${PROJECT_NAME}/velocity_heading_mux.py
     ${PROJECT_NAME}/los_guidance_node.py
+    ${PROJECT_NAME}/pd_heading_node.py
+    ${PROJECT_NAME}/diff_thrust_controller.py
     DESTINATION lib/${PROJECT_NAME}
 )
 
