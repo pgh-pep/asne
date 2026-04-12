@@ -17,13 +17,12 @@ install(PROGRAMS
     ${PROJECT_NAME}/serial_comm_node.py
     ${PROJECT_NAME}/system_controller.py
     ${PROJECT_NAME}/gps_failsafe_node.py
-    ${PROJECT_NAME}/servo_control_node.py
     ${PROJECT_NAME}/manual_control_node.py
     ${PROJECT_NAME}/motor_control_node.py
     ${PROJECT_NAME}/sim_bridge_node.py
     ${PROJECT_NAME}/motion_output_mux.py
     ${PROJECT_NAME}/los_guidance_node.py
-    ${PROJECT_NAME}/pd_heading_node.py
+    ${PROJECT_NAME}/pd_motion_controller.py
     ${PROJECT_NAME}/diff_thrust_controller.py
     DESTINATION lib/${PROJECT_NAME}
 )
