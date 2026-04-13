@@ -40,7 +40,7 @@ def generate_launch_description():
         name="pd_motion_controller",
         output="screen",
         parameters=[{
-            "debug": True,
+            "debug": False,
         }]
     )
 
