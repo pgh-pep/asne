@@ -4,7 +4,8 @@ modprobe can
 modprobe can_raw
 modprobe mttcan
 
-ip link set can0 type can bitrate 250000
+ip link set can0 down 2>/dev/null || true
+ip link set can0 type can bitrate 250000 restart-ms 100
 ip link set can0 up
 
 exit 0

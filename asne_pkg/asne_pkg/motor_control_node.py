@@ -34,7 +34,7 @@ class MotorControlNode(Node):
         self.deadband: float = 0.05
         self.is_forward = True
 
-        self.torque_sub = self.create_subscription(Float64, "/asne/torque/desired", self.torque_callback, 10)
+        self.torque_sub = self.create_subscription(Float64, "/asne/torque/final", self.torque_callback, 10)
         self.thrust_cmd_timer = self.create_timer(1, self.thrust_timer_callback)
 
         self.init_motor()
@@ -87,10 +87,14 @@ class MotorControlNode(Node):
         self.node.nmt.state = "PRE-OPERATIONAL"
         time.sleep(0.2)
 
+        # try:
+        #     self.node.sdo[0x6071].raw = 0  # starting torque = 0
+        # except canopen.SdoAbortedError as e:
+        #     self.get_logger().warn(f"failed to zero torque: {e}")
         try:
-            self.node.sdo[0x6071].raw = 0  # starting torque = 0
-        except canopen.SdoAbortedError as e:
-            self.get_logger().warn(f"failed to zero torque: {e}")
+            self.node.sdo[0x6071].raw = 0
+        except (canopen.SdoAbortedError, canopen.SdoCommunicationError) as e:
+            self.get_logger().warn(f"failed to zero torque (non-fatal): {e}")
 
         self.node.nmt.state = "OPERATIONAL"
         time.sleep(0.5)

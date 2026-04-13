@@ -15,8 +15,8 @@ class MotionOutputMux(Node):
     def __init__(self):
         super().__init__("motion_output_mux")
 
-        self.manual_torque_sub = self.create_subscription(Float64, "/asne/torque/manual", self.manual_vel_callback, 10)
-        self.auto_torque_sub = self.create_subscription(Float64, "/asne/torque/autonomous", self.auto_vel_callback, 10)
+        self.manual_torque_sub = self.create_subscription(Float64, "/asne/torque/manual", self.manual_torque_callback, 10)
+        self.auto_torque_sub = self.create_subscription(Float64, "/asne/torque/autonomous", self.auto_torque_callback, 10)
         self.manual_servo_angle_sub = self.create_subscription(Float64, "/asne/servo_angle/manual", self.manual_head_callback, 10)
         self.auto_servo_angle_sub = self.create_subscription(Float64, "/asne/servo_angle/autonomous", self.auto_head_callback, 10)
         self.state_sub = self.create_subscription(State, "/asne/state", self.state_callback, 10)
@@ -35,10 +35,10 @@ class MotionOutputMux(Node):
 
         self.update_loop = self.create_timer(0.1, self.update_timer_cb)
 
-    def manual_vel_callback(self, msg: Float64):
+    def manual_torque_callback(self, msg: Float64):
         self.manual_torque = msg.data
 
-    def auto_vel_callback(self, msg: Float64):
+    def auto_torque_callback(self, msg: Float64):
         self.auto_torque = msg.data
 
     def manual_head_callback(self, msg: Float64):
@@ -54,18 +54,21 @@ class MotionOutputMux(Node):
         self.is_estop = msg.data
 
     def update_timer_cb(self):
-        if self.is_estop:
-            servo_angle = 0.0
-            torque = 0.0
-        elif self.system_state == State.AUTONOMOUS:
-            torque = self.auto_torque
-            servo_angle = self.auto_servo_angle
-        else:
-            torque = self.manual_torque
-            servo_angle = self.manual_servo_angle
+        # if self.is_estop:
+        #     servo_angle = 0.0
+        #     torque = 0.0
+        # elif self.system_state == State.AUTONOMOUS:
+        #     torque = self.auto_torque
+        #     servo_angle = self.auto_servo_angle
+        # else:
+        # self.get_logger().info("BRO")
+        torque = self.manual_torque
+        servo_angle = self.manual_servo_angle
 
         servo_angle = max(min(SERVO_RANGE, servo_angle), -SERVO_RANGE)
         servo_angle = servo_angle * 180 / pi
+
+        servo_angle = 135 + 85 * (servo_angle / 120)
 
         self.torque_pub.publish(Float64(data=torque))
         self.servo_angle_pub.publish(Float64(data=servo_angle))

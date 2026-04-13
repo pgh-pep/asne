@@ -45,11 +45,13 @@ def launch_setup(context, *args, **kwargs):
         # ],
     )
 
-    return [
-        serial_comm_node,
-        rc_decoder_node,
-        manual_control_node,
-    ]
+    motion_output_mux = Node(
+        package="asne_pkg",
+        executable="motion_output_mux.py",
+        name="motion_output_mux",
+    )
+
+    return [serial_comm_node, rc_decoder_node, manual_control_node, motion_output_mux]
 
 
 def generate_launch_description():
