@@ -11,7 +11,8 @@ from math import atan2, pi, sin, cos, sqrt
 from geometry_msgs.msg import Point, Pose, PoseStamped
 from nav_msgs.msg import Path
 from std_srvs.srv import Trigger
-from asne_interfaces.srv import NextWaypoint
+from asne_interfaces.msg import State
+from asne_interfaces.srv import NextWaypoint, SetState
 
 class WaypointManagerNode(Node):
     def __init__(self):
@@ -60,7 +61,7 @@ class WaypointManagerNode(Node):
         # self.debug_waypoint_generator()
 
         # UNUSED: client to signal race completed
-        self.race_over_client = self.create_client(Trigger, "asne/race_completed")
+        self.set_state_client = self.create_client(SetState, "/asne/set_state")
 
         self.waypoint_timer = self.create_timer(0.01, self.waypoint_timer_callback)
 
@@ -114,8 +115,13 @@ class WaypointManagerNode(Node):
             self.current_path_idx = 0
             self.current_lap += 1
 
-            if self.current_lap >= self.n_laps:
-                self.race_over_client.call_async(Trigger.Request())
+        if self.current_lap >= self.n_laps:
+            # Set manual state and stop returning waypoints
+            req = SetState.Request()
+            req.state.state = State.MANUAL
+            self.set_state_client.call_async(req)
+            response.success = False
+            return response
 
         pose: PoseStamped = self.path.poses[self.current_path_idx]
 
