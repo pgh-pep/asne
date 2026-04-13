@@ -9,7 +9,6 @@ from rclpy.time import Time
 from asne_interfaces.srv import SetState
 from std_srvs.srv import Trigger
 
-
 class GPSFailsafeNode(Node):
     def __init__(self):
         super().__init__("gps_failsafe_node")
@@ -48,7 +47,7 @@ class GPSFailsafeNode(Node):
         if not self.gps_init:
             self.gps_init = True
             if self.gps_init_client.service_is_ready():
-                req: Trigger = Trigger()
+                req = Trigger.Request()
                 self.gps_init_client.call_async(req)
             else:
                 self.get_logger().error("failed to validate gps working")
