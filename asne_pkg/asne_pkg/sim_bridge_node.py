@@ -9,7 +9,7 @@ class SimBridgeNode(Node):
     def __init__(self):
         super().__init__("sim_bridge_node")
         self.omega_sub = self.create_subscription(Float64, "/asne/omega", self.omega_callback, 10)
-        self.velo_sub = self.create_subscription(Float64, "/asne/velocity/final", self.velocity_callback, 10)
+        self.velo_sub = self.create_subscription(Float64, "/asne/velocity/sim", self.velocity_callback, 10)
 
         self.timer = self.create_timer(0.5, self.timer_cb)
 

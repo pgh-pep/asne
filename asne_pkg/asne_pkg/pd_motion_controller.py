@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import rclpy
-from math import pi
+from math import pi, atan
 from rclpy.node import Node
 from std_msgs.msg import Float64
 from nav_msgs.msg import Odometry
@@ -42,8 +42,8 @@ class PDMotionController(Node):
         self.velocity_pid = PID(velocity_kp, 0, velocity_kd)
 
         # pub sub
-        self.create_subscription(Float64, "/asne/heading/final", self.heading_callback, 10)
-        self.create_subscription(Float64, "/asne/velocity/final", self.velocity_callback, 10)
+        self.create_subscription(Float64, "/asne/heading/autonomous", self.heading_callback, 10)
+        self.create_subscription(Float64, "/asne/velocity/autonomous", self.velocity_callback, 10)
         self.create_subscription(Odometry, "/odometry/filtered", self.odom_callback, 10)
 
         self.torque_pub = self.create_publisher(Float64, "/asne/torque/autonomous", 10)
@@ -91,7 +91,7 @@ class PDMotionController(Node):
 
         # calc servo angle
         omega = self.heading_pid.update(heading_error, dt)
-        servo_angle = (self.pivot_distance * omega) / self.actual_velocity if self.actual_velocity != 0.0 else 0.0
+        servo_angle = atan((self.pivot_distance * omega) / self.actual_velocity) if self.actual_velocity != 0.0 else 0.0
 
         self.torque_pub.publish(Float64(data=float(torque)))
         self.servo_pub.publish(Float64(data=float(servo_angle)))

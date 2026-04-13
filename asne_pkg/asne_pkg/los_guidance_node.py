@@ -21,9 +21,11 @@ class LOSGuidanceNode(Node):
 
         self.declare_parameter("lookahead_dist", 10.0)  # m
         self.declare_parameter("waypoint_thresh", 10.0)  # m
+        self.declare_parameter("desired_velocity", 15.0) # m/s
 
         self.lookahead_dist: float = self.get_parameter("lookahead_dist").get_parameter_value().double_value
         self.waypoint_thresh: float = self.get_parameter("waypoint_thresh").get_parameter_value().double_value
+        self.desired_velocity: float = self.get_parameter("desired_velocity").get_parameter_value().double_value
 
         # all waypoints in ENU (m) -> (east = x, north = y)
         # WP_A will be init as (0,0)
@@ -77,7 +79,6 @@ class LOSGuidanceNode(Node):
         future.add_done_callback(self.waypoint_callback)
 
     def waypoint_callback(self, future: rclpy.task.Future) -> None:
-        self.get_logger().info("waypoint callback")
         result = future.result()
         if result is None or not result.success:
             self.get_logger().warn("next waypoint request failed")
@@ -130,7 +131,6 @@ class LOSGuidanceNode(Node):
         if prev_wp == curr_wp:
             psi_d = atan2(curr_wp[1] - y, curr_wp[0] - x)
             self.heading_pub.publish(Float64(data=psi_d))
-            self.velocity_pub.publish(Float64(data=1.0))
             return
 
         # path angle
@@ -162,7 +162,7 @@ class LOSGuidanceNode(Node):
             self.request_next_waypoint()
 
         self.heading_pub.publish(Float64(data=psi_d))
-        self.velocity_pub.publish(Float64(data=1.0))
+        self.velocity_pub.publish(Float64(data=self.desired_velocity))
 
 
 def main(args=None):  # type: ignore

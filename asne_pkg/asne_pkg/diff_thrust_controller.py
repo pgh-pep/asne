@@ -70,9 +70,6 @@ class DiffThrustController(Node):
             self.left_multiplier = 0
             self.right_multiplier = 0
 
-        self.get_logger().info(f"right mult: {self.right_multiplier}")
-        self.get_logger().info(f"left mult: {self.right_multiplier}")
-
     def update_thrusters(self) -> None:
         # Normalize multipliers
         max_cmd = max(abs(self.left_multiplier), abs(self.right_multiplier))

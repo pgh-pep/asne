@@ -20,25 +20,28 @@ def generate_launch_description():
            "waypoint_thresh": 10.0,
            "WP_A_lat": -33.722600,
            "WP_A_lon": 150.674123,
-           "WP_B_lat": -33.72142674509712,
-           "WP_B_lon": 150.67567838126456,
+           "WP_B_lat": -33.722600,
+           "WP_B_lon": 150.674123,
            "lane_width": 15.0,
            "turn_rad": 20.0,
            "turn_points": 6,
         }]
     )
 
-    velocity_heading_mux = Node(
+    motion_output_mux = Node(
         package="asne_pkg",
-        executable="velocity_heading_mux.py",
-        name="velocity_heading_mux",
+        executable="motion_output_mux.py",
+        name="motion_output_mux",
     )
 
-    pd_heading_node = Node(
+    pd_motion_controller = Node(
         package="asne_pkg",
-        executable="pd_heading_node.py",
-        name="pd_heading_node",
-        output="screen"
+        executable="pd_motion_controller.py",
+        name="pd_motion_controller",
+        output="screen",
+        parameters=[{
+            "debug": True,
+        }]
     )
 
     los_guidance_node = Node(
@@ -48,4 +51,4 @@ def generate_launch_description():
         output="screen",
     )
 
-    return LaunchDescription([waypoint_manager_node, los_guidance_node, velocity_heading_mux, pd_heading_node])
+    return LaunchDescription([waypoint_manager_node, los_guidance_node, motion_output_mux, pd_motion_controller])
