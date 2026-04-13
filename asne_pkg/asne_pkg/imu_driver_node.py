@@ -43,7 +43,7 @@ class BNO055Node(Node):
         self.frame_id = self.get_parameter('frame_id').value
 
         # Publisher — topic matches your EKF config
-        self.pub = self.create_publisher(Imu, '/wamv/sensors/imu/imu/data', 10)
+        self.pub = self.create_publisher(Imu, '/imu/data', 10)
 
         # Init I2C
         self.bus  = smbus2.SMBus(bus_num)
