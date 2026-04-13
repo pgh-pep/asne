@@ -47,7 +47,7 @@ class PDMotionController(Node):
         self.create_subscription(Odometry, "/odometry/filtered", self.odom_callback, 10)
 
         self.torque_pub = self.create_publisher(Float64, "/asne/torque/autonomous", 10)
-        self.servo_pub = self.create_publisher(Float64, "/asne/desired_servo/autonomous", 10)  # radians
+        self.servo_pub = self.create_publisher(Float64, "/asne/servo_angle/autonomous", 10)  # radians
         self.omega_pub = self.create_publisher(Float64, "/asne/omega", 10)  # radians
 
         self.create_timer(0.1, self.update_controls)
