@@ -24,6 +24,7 @@ install(PROGRAMS
     ${PROJECT_NAME}/los_guidance_node.py
     ${PROJECT_NAME}/pd_motion_controller.py
     ${PROJECT_NAME}/diff_thrust_controller.py
+    ${PROJECT_NAME}/imu_driver_node.py
     DESTINATION lib/${PROJECT_NAME}
 )
 
